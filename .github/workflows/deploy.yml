@@ -32,4 +32,6 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy with Serverless
-        run: serverless deploy --stage prod
+        run: |
+          cd estatengine-backend
+          serverless deploy --stage prod
