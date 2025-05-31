@@ -34,5 +34,6 @@ jobs:
       - name: Deploy with Serverless
         run: |
           cd estatengine-backend
+          export SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}
           serverless login
           serverless deploy --stage prod
