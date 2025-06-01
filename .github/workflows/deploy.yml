@@ -22,7 +22,7 @@ jobs:
         run: npm i
 
       - name: Install Serverless Framework
-        run: npm install -g serverless serverless-appsync-plugin
+        run: npm install -g serverless
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -34,6 +34,7 @@ jobs:
       - name: Deploy with Serverless
         run: |
           cd estatengine-backend
+          npm install serverless-appsync-plugin
           export SERVERLESS_ACCESS_KEY=${{ secrets.SERVERLESS_ACCESS_KEY }}
           export STAGE=prod
           serverless login
