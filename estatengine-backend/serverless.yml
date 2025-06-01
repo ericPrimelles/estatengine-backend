@@ -22,7 +22,7 @@ parameters:
 appsync:
   # TODO: Add Caching, WAF, Domain, authentication, etc.
   name: ${self:service}-${STAGE}
-  schema: appsync/schema.graphql
+  schema: ./appsync/schema.graphql
   authentication:
     type: API_Key
   apiKeys:
