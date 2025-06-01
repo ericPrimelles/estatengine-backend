@@ -8,7 +8,7 @@ service: estatengine-backend
 provider:
   name: aws
   runtime: nodejs20.x
-  stage: ${sls:stage}
+  stage: ${env:STAGE}
 
 plugins:
   - serverless-appsync-plugin
