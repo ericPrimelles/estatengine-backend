@@ -1,0 +1,8 @@
+type Query{
+    mockTest: mockResponse!
+}
+
+type mockResponse{
+    status: Int!
+    message: String!
+}
