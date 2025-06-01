@@ -1,0 +1,3 @@
+mock:
+  type: NONE
+  description: Mock data source for testing purposes

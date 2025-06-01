@@ -20,13 +20,20 @@ parameters:
     description: The stage to deploy to (e.g., dev, prod)
 
 appsync:
+  # TODO: Add Caching, WAF, Domain, authentication, etc.
   name: ${self:service}-${STAGE}
+  schema: appsync/schema.graphql
   authentication:
     type: API_Key
   apiKeys:
     - name: ${self:service}-${STAGE}-api-key
       description: API Key for ${self:service} in ${self:provider.stage} stage
       expires: 1Y # Example expiration date, adjust as needed
+  
+  datasources:
+    - ${file(appsync/datasources/mock.yml)}
+  resolvers:
+    - ${file(appsync/resolvers/resolvers.yml)}
 
 functions:
   hello:
