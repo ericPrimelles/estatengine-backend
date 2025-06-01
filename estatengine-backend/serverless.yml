@@ -8,6 +8,25 @@ service: estatengine-backend
 provider:
   name: aws
   runtime: nodejs20.x
+  stage: ${sls:stage}
+
+plugins:
+  - serverless-appsync-plugin
+
+parameters:
+  STAGE:
+    type: string
+    default: prod
+    description: The stage to deploy to (e.g., dev, prod)
+
+appsync:
+  name: ${self:service}-${STAGE}
+  authentication:
+    type: API_Key
+  apiKeys:
+    - name: ${self:service}-${STAGE}-api-key
+      description: API Key for ${self:service} in ${self:provider.stage} stage
+      expires: 1Y # Example expiration date, adjust as needed
 
 functions:
   hello:
