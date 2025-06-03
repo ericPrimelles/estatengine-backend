@@ -29,6 +29,7 @@ jobs:
 
     - name: 🔧 Install dependencies (if needed)
       run: |
+        cd estatengine-backend
         if [ -f package.json ]; then npm install; fi
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
@@ -37,10 +38,5 @@ jobs:
 
     - name: ☁️ Deploy SAM application
       run: |
-        sam deploy \
-          --stack-name drivestae-estatengine-backend-prod \
-          --region ${{ secrets.ESTATENGINE_DEFAULT_REGION }} \
-          --capabilities CAPABILITY_IAM \
-          --no-confirm-changeset \
-          --no-fail-on-empty-changeset \
-          --resolve-s3
+        
+        sam deploy 

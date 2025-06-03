@@ -3,7 +3,7 @@
 version = 0.1
 
 [default.global.parameters]
-stack_name = "estatengine-backend"
+stack_name = "drivestae-estatengine-backend-prod"
 
 [default.build.parameters]
 cached = true
