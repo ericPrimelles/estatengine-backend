@@ -4,16 +4,33 @@ schema {
 }
 
 type Query {
-  getPost(id: String!): Post
-  sayHello(name: String): String
-  sayGoodbye(name: String): String
+ 
 }
 
 type Mutation {
-  addPost(author: String!, title: String!, content: String!): Post!
+  createCustomer(customerId: String!, customerName: String!, agency: String!, realtorSpeciality: [Specialities]!, languages [String], experience: Int, phone: Phones
+                  communicationWays : CommWays): Customer!
 }
 
-type Post {
+enum Specialities {
+ RESIDENTIAL
+ COMMERCIAL
+ INVESTMENT
+}
+enum CommWays {
+  EMAIL
+  PHONE
+  SMS
+  WHATSAPP
+}
+type Phone {
+  alias: String,
+  countryCode: String,
+  number: String
+  extension: String
+  isPrimary: Boolean
+}
+type Customer{
   id: String!
   author: String
   title: String

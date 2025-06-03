@@ -4,89 +4,79 @@ Description: >
   drivestate-estatengine-backend
 
   Sample SAM Template for estatengine-backend
+
+Parameters:
+  Stage:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+    Description: The stage for the application (dev or prod)
+    ConstraintDescription: Must be either dev or prod.
 Resources:
-  PostsTable:
+  EstatengineBackendTable:
     Type: AWS::Serverless::SimpleTable
-
-  Greeter:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: greeter/
-      Handler: app.lambdaHandler
-      Runtime: nodejs22.x
-      Architectures:
-      - x86_64
+      TableName:
+        Fn::Join:
+          - '-'
+          - - 'estatengine-backend'
+            - !Ref Stage
+      PrimaryKey:
+        Name: PK
+        Type: String     
 
-  HelloWorldGraphQLApi:
+
+  # Greeter:
+  #   Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  #   Properties:
+  #     CodeUri: greeter/
+  #     Handler: app.lambdaHandler
+  #     Runtime: nodejs22.x
+  #     Architectures:
+  #     - x86_64
+
+  EstatengineGraphQLApi:
     Type: AWS::Serverless::GraphQLApi
     Properties:
+      Name: !Sub 'estatengine-backend-gqlapi-${Stage}'
       SchemaUri: ./gql/schema.graphql
       Auth:
         Type: API_KEY
       ApiKeys:
         MyApiKey:
           Description: my api key
-      DataSources:
+      DataSources: 
         DynamoDb:
-          Posts:
-            TableName: !Ref PostsTable
-            TableArn: !GetAtt PostsTable.Arn
-        Lambda:
-          Greeter:
-            FunctionArn: !GetAtt Greeter.Arn
+          EstatengineBackendTable:
+            TableName: !Ref EstatengineBackendTable
+            TableArn: !GetAtt EstatengineBackendTable.Arn 
+       
       Functions:
-        preprocessPostItem:
+        processCustomer:
           Runtime:
             Name: APPSYNC_JS
             Version: 1.0.0
           DataSource: NONE
-          CodeUri: ./gql/preprocessPostItem.js
-        createPostItem:
+          CodeUri: ./gql/functions/processCustomer.js
+        createcustomer:
           Runtime:
             Name: APPSYNC_JS
             Version: 1.0.0
-          DataSource: Posts
-          CodeUri: ./gql/createPostItem.js
-        getPostFromTable:
-          Runtime:
-            Name: APPSYNC_JS
-            Version: 1.0.0
-          DataSource: Posts
-          CodeUri: ./gql/getPostFromTable.js
-        greet:
-          Runtime:
-            Name: APPSYNC_JS
-            Version: 1.0.0
-          DataSource: Greeter
-          CodeUri: ./gql/greet.js
+          DataSource: EstatengineBackendTable
+          CodeUri: ./gql/functions/createCustomer.js
+        
       Resolvers:
         Mutation:
-          addPost:
+          createCustomer:
             Runtime:
               Name: APPSYNC_JS
               Version: 1.0.0
             Pipeline:
-            - preprocessPostItem
-            - createPostItem
-        Query:
-          getPost:
-            Runtime:
-              Name: APPSYNC_JS
-              Version: 1.0.0
-            Pipeline:
-            - getPostFromTable
-          sayHello:
-            Runtime:
-              Name: APPSYNC_JS
-              Version: 1.0.0
-            Pipeline:
-            - greet
-          sayGoodbye:
-            Runtime:
-              Name: APPSYNC_JS
-              Version: 1.0.0
-            Pipeline:
-            - greet
+            - processCustomer
+            - createCustomer
+        
 
 
   ApplicationResourceGroup:
