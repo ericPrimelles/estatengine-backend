@@ -38,5 +38,5 @@ jobs:
 
     - name: ☁️ Deploy SAM application
       run: |
-        
+        cd estatengine-backend
         sam deploy 
