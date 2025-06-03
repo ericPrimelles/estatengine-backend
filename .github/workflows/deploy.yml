@@ -42,4 +42,4 @@ jobs:
     - name: ☁️ Deploy SAM application
       run: |
         cd estatengine-backend
-        sam deploy -y
+        sam deploy --confirm-changeset --on-failure DELETE
