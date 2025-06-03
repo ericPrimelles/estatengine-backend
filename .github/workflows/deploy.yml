@@ -42,4 +42,4 @@ jobs:
     - name: ☁️ Deploy SAM application
       run: |
         cd estatengine-backend
-        sam deploy --confirm-changeset --on-failure DELETE
+        sam deploy --no-confirm-changeset --on-failure DELETE --region ${{secrets.ESTATENGINE_DEFAULT_REGION}}
