@@ -19,7 +19,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+        aws-region: ${{ secrets.ESTATENGINE_DEFAULT_REGION }}
         #role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
         role-session-name: GitHubActionsSession
 
@@ -40,7 +40,7 @@ jobs:
       run: |
         sam deploy \
           --stack-name drivestae-estatengine-backend-prod \
-          --region ${{ secrets.AWS_REGION }} \
+          --region ${{ secrets.ESTATENGINE_DEFAULT_REGION }} \
           --capabilities CAPABILITY_IAM \
           --no-confirm-changeset \
           --no-fail-on-empty-changeset \
