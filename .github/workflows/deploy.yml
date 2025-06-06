@@ -40,7 +40,8 @@ jobs:
             - name: Serverless Deploy
               run: |
                 
+                export STAGE=dev
                 pip install -r requirements.txt 
                 npm i -g serverless serverless-python-requirements
                 serverless login
-                serverless deploy --stage dev
+                serverless deploy
