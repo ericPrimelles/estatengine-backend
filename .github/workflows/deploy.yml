@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - main
+            - openai-proxy
 jobs:
     deploy:
         name: Deploy Backend
@@ -44,6 +45,6 @@ jobs:
                 cd terraform
                 terraform init
                 terraform validate
-                terraform plan -out-tfplan
+                terraform plan -out=./tfplan
                 terraform apply -auto-approve tfplan
                 
