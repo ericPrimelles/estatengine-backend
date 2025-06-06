@@ -1,0 +1,39 @@
+# Local .terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+
+# Crash logs
+crash.log
+
+# Exclude override files as they are usually local
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Plan output files
+*.tfplan
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Lambda build artifacts
+*.zip
+lambda_function.zip
+
+# Python cache (if you're using Python in Lambdas)
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs and local output
+*.log
