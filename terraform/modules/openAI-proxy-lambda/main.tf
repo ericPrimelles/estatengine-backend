@@ -57,7 +57,7 @@ resource "aws_iam_policy" "lambda_secrets" {
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_logs" {
-  role = aws_iam_role.openAI-proxy-role
+  role = aws_iam_role.openAI-proxy-role.arn
   policy_arn = aws_iam_policy.lambda_logging.arn
 }
 
