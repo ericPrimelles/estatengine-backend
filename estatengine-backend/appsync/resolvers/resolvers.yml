@@ -1,3 +1,0 @@
-Query.mockTest:
-  dataSource: mock
-  code: appsync/resolvers/code/mockTest.js
