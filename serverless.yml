@@ -1,6 +1,6 @@
 service: my-service-name  # Change to your project/service name
 
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 provider:
   name: aws
