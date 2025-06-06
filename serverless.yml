@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: python3.11  # or python3.11, etc.
   region: us-east-2
-  stage: ${env:STAGE}
+  stage: ${sls:stage}
   memorySize: 128
   timeout: 10
   environment:
