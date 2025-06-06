@@ -22,6 +22,9 @@ jobs:
               uses: actions/setup-python@v3
               with:
                 python-version: "3.13"
+            - name: Set up NodeJs
+              uses: actions/setup-node@v4
+             
             
             - name: Install Terraform
               uses: hashicorp/setup-terraform@v3
@@ -35,16 +38,12 @@ jobs:
                 aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                 aws-region: ${{ env.AWS_REGION }}
 
-            - name: Package Lambda
+            - name: Install dependencies
               run: |
-                cd src/openAI_proxy
-                pip install -r requirements.txt --target .
-            
-            - name: Terraform Deploy
-              run: |
-                cd terraform
-                terraform init
-                terraform validate
-                terraform plan -out=./tfplan
-                terraform apply -auto-approve tfplan
                 
+                pip install -r requirements.txt 
+                npm install serverless serverless-python-requirements
+            - name: Serverless Deploy
+              run: |
+                serverless login
+                serverless deploy --stage dev

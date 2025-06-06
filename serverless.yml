@@ -1,0 +1,41 @@
+service: my-service-name  # Change to your project/service name
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.11  # or python3.11, etc.
+  region: us-east-2
+  stage: ${env:STAGE}
+  memorySize: 128
+  timeout: 10
+  environment:
+    STAGE: ${opt:stage, 'dev'}
+    APP_NAME: my-service-name
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - loss:PutLogEvents
+iam:
+
+# Optional: Plugins
+plugins:
+  - serverless-offline
+  - python-requierements
+  
+
+functions:
+  hello:
+    name: dvst-estatengine-backend-openai-proxy-${sls:stage}
+    handler: src/openai_handler.handler
+    
+    # events:
+    #   - http:
+    #       path: hello
+    #       method: get
+    #       cors: true
+
