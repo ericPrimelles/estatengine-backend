@@ -1,4 +1,4 @@
-service: my-service-name  # Change to your project/service name
+service: dvst-estatengine-backend-${env:STAGE}  # Change to your project/service name
 
 frameworkVersion: '4'
 
@@ -19,7 +19,7 @@ provider:
           Action:
             - logs:CreateLogGroup
             - logs:CreateLogStream
-            - loss:PutLogEvents
+            - logs:PutLogEvents
 
 
   
