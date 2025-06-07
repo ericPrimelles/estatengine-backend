@@ -24,7 +24,7 @@ iam:
 
 # Optional: Plugins
 plugins:
-  - python-requierements
+  - python-requirements
   
 
 functions:
