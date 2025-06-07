@@ -53,5 +53,5 @@ jobs:
                 
                 npm i -g serverless 
                 sls login 
-                npm install serverless-appsync-plugin
+                npm install serverless-appsync-plugin ---debug
                 sls deploy --stage $STAGE --region $AWS_REGION
