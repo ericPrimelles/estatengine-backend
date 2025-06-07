@@ -44,6 +44,6 @@ jobs:
                 export STAGE=dev
                 pip install -r requirements.txt 
                 npm i -g serverless 
-                sls login -- accessKey ${{ secrets.SERVERLESS_ACCESS_KEY }}
+                sls login 
                 sls plugin install --name serverless-python-requirements
                 sls deploy --stage $STAGE --region $AWS_REGION
