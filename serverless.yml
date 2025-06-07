@@ -23,14 +23,21 @@ provider:
           Resource: "arn:aws:logs:*"
 plugins:
   - serverless-appsync-plugin
-
+package: 
+  exclude:
+    - node_modules/**
+    - .git/**
+    - .vscode/**
+    - .github/**
+    - src/**
 functions:
   openai:
     name: dvst-estatengine-backend-openai-proxy-${sls:stage}
     handler: openai_handler.handler
-    zipFile: src/openai_handler.zip
+    package: 
+      artifact: ./src/openai_proxy/openai_handler.zip
 
-appsync:
+appSync:
   name: dvst-estatengine-backend-graphqlApi-${sls:stage}
   schema: ./appsync/schema.graphql
   authentication:
