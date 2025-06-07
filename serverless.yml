@@ -20,16 +20,8 @@ provider:
             - logs:CreateLogGroup
             - logs:CreateLogStream
             - loss:PutLogEvents
-iam:
 
-# Optional: Plugins
-plugins:
-  - serverless-python-requirements
 
-custom:
-  pythonRequirements:
-    dockerizePip: true
-    zip: true
   
   
 
