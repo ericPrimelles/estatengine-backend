@@ -47,6 +47,7 @@ jobs:
                 pip install -r requirements.txt --target ./package
                 cd package
                 zip -r ../openai_handler.zip .
+                cd ..
                 zip -g ../openai_handler.zip openai_handler.py
                 npm i -g serverless 
                 sls login 
