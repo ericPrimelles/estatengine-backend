@@ -42,7 +42,12 @@ jobs:
               run: |
                 
                 export STAGE=dev
-                pip install -r requirements.txt 
+                cd src/openai_proxy
+                mkdir package
+                pip install -r requirements.txt --target ./package
+                cd package
+                zip -r ../openai_handler.zip .
+                zip -g ../openai_handler.zip openai_handler.py
                 npm i -g serverless 
                 sls login 
                 

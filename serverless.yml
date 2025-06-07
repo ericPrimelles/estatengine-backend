@@ -25,7 +25,8 @@ provider:
 functions:
   hello:
     name: dvst-estatengine-backend-openai-proxy-${sls:stage}
-    handler: src/openai_handler.handler
+    handler: openai_handler.handler
+    zipFile: src/openai_handler.zip
     
     # events:
     #   - http:
