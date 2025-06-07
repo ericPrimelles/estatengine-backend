@@ -13,7 +13,7 @@ jobs:
         env:
             AWS_REGION: us-east-2
             TF_VAR_stage: prod
-            SERVERLESS_ACCESS_KEY: $${{secrets.SERVERLESS_ACCESS_KEY}}
+            SERVERLESS_ACCESS_KEY: ${{secrets.SERVERLESS_ACCESS_KEY}}
         
         steps:
             - name: Checkout repo
