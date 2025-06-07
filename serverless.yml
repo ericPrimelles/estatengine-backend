@@ -27,10 +27,10 @@ functions:
     name: dvst-estatengine-backend-openai-proxy-${sls:stage}
     handler: openai_handler.handler
     zipFile: src/openai_handler.zip
-    
-    # events:
-    #   - http:
-    #       path: hello
-    #       method: get
-    #       cors: true
+    events:
+      - http:
+          path: openai-proxy
+          description: OpenAI Proxy Endpoint
+          method: post
+          cors: true
 
