@@ -46,9 +46,9 @@ jobs:
                 mkdir package
                 pip install -r requirements.txt --target ./package
                 cd package
-                zip -r ../openai_handler.zip .
+                zip -rq ../openai_handler.zip .
                 cd ..
-                zip -g ../openai_handler.zip openai_handler.py
+                zip -gq ../openai_handler.zip openai_handler.py
                 cd ..
                 npm i -g serverless 
                 sls login 
