@@ -24,7 +24,6 @@ iam:
 
 # Optional: Plugins
 plugins:
-  - serverless-offline
   - python-requierements
   
 
