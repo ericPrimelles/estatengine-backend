@@ -73,7 +73,13 @@ resources:
                   Action:
                     - lambda:InvokeFunction
                   Resource:
-                    - !GetAtt openai.Arn
+                    - Fn::Join:
+                      - ''
+                      - - "arn:aws:lambda:"
+                        - Ref: AWS::Region
+                        - ":"
+                        - Ref: AWS::AccountId
+                        - ":function:dvst-estatengine-backend-openai-proxy-${sls:stage}"
           - PolicyName: AppsyncDynamoDBPolicy
             PolicyDocument:
               Version: '2012-10-17'
