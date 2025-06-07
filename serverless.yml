@@ -23,19 +23,20 @@ provider:
           Resource: "arn:aws:logs:*"
 plugins:
   - serverless-appsync-plugin
-package: 
+package:
+  individually: true 
   exclude:
-    - node_modules/**
-    - .git/**
-    - .vscode/**
-    - .github/**
-    - src/**
+    - ./**
+  include:
+    - appsync/*
+   
 functions:
   openai:
     name: dvst-estatengine-backend-openai-proxy-${sls:stage}
     handler: openai_handler.handler
     package: 
-      artifact: ./src/openai_proxy/openai_handler.zip
+      include:
+        - src/openai_proxy/*
 
 appSync:
   name: dvst-estatengine-backend-graphqlApi-${sls:stage}
@@ -46,10 +47,9 @@ appSync:
     - name: dvst-estatengine-backend-graphqlApi-${sls:stage}-key
       description: API Key for the GraphQL API
       expires: 1Y # 1 year, adjust as needed
-  dataSources: ${file(./appsync/datasources.yml)}
-    
-      
-  
+  dataSources: 
+    - ${file(./appsync/datasources.yml)}
+
 
 resources:
   Resources:
