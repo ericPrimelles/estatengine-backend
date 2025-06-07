@@ -23,7 +23,7 @@ provider:
           Resource: "arn:aws:logs:*"
 plugins:
   - serverless-appsync-plugin
-  
+
 functions:
   openai:
     name: dvst-estatengine-backend-openai-proxy-${sls:stage}
@@ -32,7 +32,7 @@ functions:
 
 appsync:
   name: dvst-estatengine-backend-graphqlApi-${sls:stage}
-  schema: src/schema.graphql
+  schema: ./src/schema.graphql
   authentication:
     type: API_KEY
   apiKeys:
