@@ -49,6 +49,7 @@ jobs:
                 zip -r ../openai_handler.zip .
                 cd ..
                 zip -g ../openai_handler.zip openai_handler.py
+                cd..
                 npm i -g serverless 
                 sls login 
                 
