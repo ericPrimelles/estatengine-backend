@@ -21,16 +21,61 @@ provider:
             - logs:CreateLogStream
             - logs:PutLogEvents
           Resource: "arn:aws:logs:*"
-
+plugins:
+  - serverless-appsync-plugin
+  
 functions:
-  hello:
+  openai:
     name: dvst-estatengine-backend-openai-proxy-${sls:stage}
     handler: openai_handler.handler
     zipFile: src/openai_handler.zip
-    events:
-      - http:
-          path: openai-proxy
-          description: OpenAI Proxy Endpoint
-          method: post
-          cors: true
 
+appsync:
+  name: dvst-estatengine-backend-graphqlApi-${sls:stage}
+  schema: src/schema.graphql
+  authentication:
+    type: API_KEY
+  apiKeys:
+    - name: dvst-estatengine-backend-graphqlApi-${sls:stage}-key
+      description: API Key for the GraphQL API
+      expires: 1Y # 1 year, adjust as needed
+  dataSources: ${file(./appsync/datasources.yml)}
+    
+      
+  
+
+resources:
+  Resources:
+    # Template roles
+    AppsyncPermissionsRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: appsync.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: AppsyncLambdaInvocationPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - lambda:InvokeFunction
+                  Resource:
+                    - !GetAtt openai.Arn
+          - PolicyName: AppsyncDynamoDBPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - dynamodb:PutItem
+                    - dynamodb:GetItem
+                    - dynamodb:Query
+                    - dynamodb:Scan
+                  Resource:
+                    - "arn:aws:dynamodb:*" #${AWS::Region}:${AWS::AccountId}:table/${self:custom.tableName} TODO: REPLACE WITH YOUR TABLE NAME"

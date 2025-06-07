@@ -51,7 +51,7 @@ jobs:
                 zip -gq ../openai_handler.zip openai_handler.py
                 cd ../..
                 
-                npm i -g serverless 
+                npm i -g serverless serverless-appsync-plugin
                 sls login 
                 
                 sls deploy --stage $STAGE --region $AWS_REGION
