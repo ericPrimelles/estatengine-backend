@@ -45,5 +45,5 @@ jobs:
                 pip install -r requirements.txt 
                 npm i -g serverless 
                 sls login 
-                sls plugin install --name serverless-python-requirements
+                
                 sls deploy --stage $STAGE --region $AWS_REGION
