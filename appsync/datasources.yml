@@ -1,2 +1,11 @@
 mock:
   type: NONE
+
+BackendDdBbTable:
+  type: AMAZON_DYNAMODB
+  config:
+    tableName: dvst-estatengine-backend-ddb-${sls:stage}
+    serviceRoleArn: !GetAtt AppsyncPermissionsRole.Arn
+    region: ${self:custom.region}
+    description: DynamoDB table for the backend data
+    
