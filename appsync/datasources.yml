@@ -6,6 +6,6 @@ BackendDdBbTable:
   config:
     tableName: dvst-estatengine-backend-ddb-${sls:stage}
     serviceRoleArn: !GetAtt AppsyncPermissionsRole.Arn
-    region: ${self:custom.region}
+    region: ${self:provider.region}
     description: DynamoDB table for the backend data
     
