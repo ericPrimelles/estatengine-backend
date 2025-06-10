@@ -106,7 +106,7 @@ resources:
           - AttributeName: SK
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: PK
             KeyType: HASH
           - AttributeName: SK
             KeyType: RANGE
