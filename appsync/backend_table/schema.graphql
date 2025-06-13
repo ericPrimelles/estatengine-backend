@@ -1,6 +1,9 @@
 extend type Mutation{
     createRealtor(input: CreateRealtorInput!): Realtor
 }
+extend type Query {
+    getRealtor(PK: ID!, SK: ID!): Realtor
+}
 
 input CreateRealtorInput {
     name: String!
