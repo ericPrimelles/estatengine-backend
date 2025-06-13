@@ -1,4 +1,4 @@
-import util from "@aws-appsync/utils";
+import {util} from "@aws-appsync/utils";
 
 /**
  * Called before the request function of the first AppSync function in the pipeline.
