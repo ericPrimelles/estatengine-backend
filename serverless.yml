@@ -42,7 +42,7 @@ appSync:
   name: dvst-estatengine-backend-graphqlApi-${sls:stage}
   schema:
     - ./appsync/schema.graphql
-    - .appsync/backend_table/schema.graphql
+    - ./appsync/backend_table/schema.graphql
   authentication:
     type: API_KEY
   apiKeys:
