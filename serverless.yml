@@ -54,7 +54,7 @@ appSync:
   resolvers:
     - ${file(./appsync/backend_table/pipelines.yml)}
   pipelineFunctions:
-    - ${file(./appsync/backend_table/pipelines.yml)}
+    - ${file(./appsync/backend_table/functions.yml)}
 
 resources:
   Resources:
