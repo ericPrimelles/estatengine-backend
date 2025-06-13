@@ -52,7 +52,7 @@ appSync:
   dataSources: 
     - ${file(./appsync/datasources.yml)}
   resolvers:
-    - ${file(./appsync/backend_table/resolvers.yml)}
+    - ${file(./appsync/backend_table/pipelines.yml)}
   pipelineFunctions:
     - ${file(./appsync/backend_table/pipelines.yml)}
 
