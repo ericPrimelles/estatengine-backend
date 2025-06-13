@@ -1,0 +1,5 @@
+Mutation.createRealtor:
+  dataSource: BackendDdBbTable
+  functions:
+    - createRealtorFunction
+  code: appsync/backend_table/pipelines/Mutation.createRealtor.js

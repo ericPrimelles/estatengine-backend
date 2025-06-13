@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "aws-appsync": "^4.1.10"
+  }
+}

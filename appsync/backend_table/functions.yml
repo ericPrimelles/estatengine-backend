@@ -1,0 +1,3 @@
+createRealtorFunction:
+  dataSource: BackendDdBbTable
+  code: appsync/backend_table/functions/createRealtor.js

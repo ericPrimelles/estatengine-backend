@@ -1,0 +1,33 @@
+extend type Mutation{
+    createRealtor(input: CreateRealtorInput!): Realtor
+}
+
+input CreateRealtorInput {
+    name: String!
+    midddleName: String
+    lastName: String!
+    email: String!
+    phone: String!
+    agentTyype: String!
+    operationAreas: [String]!
+    languages: [String]!
+    communicationStyles: [String]!
+    realEstateCompany: String!
+    corporativeColors: [String]!
+}
+
+type Realtor {
+    PK: ID!
+    SK: ID!
+    name: String!
+    midddleName: String
+    lastName: String!
+    email: String!
+    phone: String!
+    agentTyype: String!
+    operationAreas: [String]!
+    languages: [String]!
+    communicationStyles: [String]!
+    realEstateCompany: String!
+    corporativeColors: [String]!
+}

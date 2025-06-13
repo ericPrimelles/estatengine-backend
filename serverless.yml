@@ -40,7 +40,9 @@ functions:
 
 appSync:
   name: dvst-estatengine-backend-graphqlApi-${sls:stage}
-  schema: ./appsync/schema.graphql
+  schema:
+    - ./appsync/schema.graphql
+    - .appsync/backend_table/schema.graphql
   authentication:
     type: API_KEY
   apiKeys:
@@ -49,7 +51,10 @@ appSync:
       expires: 1Y # 1 year, adjust as needed
   dataSources: 
     - ${file(./appsync/datasources.yml)}
-
+  resolvers:
+    - ${file(./appsync/backend_table/resolvers.yml)}
+  pipelineFunctions:
+    - ${file(./appsync/backend_table/pipelines.yml)}
 
 resources:
   Resources:
