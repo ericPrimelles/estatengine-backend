@@ -38,11 +38,31 @@ export function request(ctx) {
  */
 
 export const response = (ctx) => {
+   if (ctx.error){
+        return {
+            data: null,
+            message: ctx.error.message,
+        };
+    }
+    
     if (ctx.result) {
         return {
-            ...ctx.result,
-            PK: ctx.result.PK,
-            SK: ctx.result.SK
+            data: {
+                PK: ctx.result.PK,
+                SK: ctx.result.SK,
+                name: ctx.result.name,
+                midddleName: ctx.result.midddleName,
+                lastName: ctx.result.lastName,
+                email: ctx.result.email,
+                phone: ctx.result.phone,
+                agentTyype: ctx.result.agentTyype,
+                operationAreas: ctx.result.operationAreas,
+                languages: ctx.result.languages,
+                communicationStyles: ctx.result.communicationStyles,
+                realEstateCompany: ctx.result.realEstateCompany,
+                corporativeColors: ctx.result.corporativeColors
+            },
+            message: "Ok"
         };
     }
 };
