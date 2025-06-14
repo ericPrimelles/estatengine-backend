@@ -1,8 +1,8 @@
 extend type Mutation{
-    createRealtor(input: CreateRealtorInput!): Realtor
+    createRealtor(input: CreateRealtorInput!): RealtorResponse
 }
 extend type Query {
-    getRealtor(PK: ID!, SK: ID!): Realtor
+    getRealtor(PK: ID!, SK: ID!): RealtorResponse
 }
 
 input CreateRealtorInput {
@@ -33,4 +33,9 @@ type Realtor {
     communicationStyles: [String]!
     realEstateCompany: String!
     corporativeColors: [String]!
+}
+
+type RealtorResponse {
+    data: Realtor
+    message: String
 }

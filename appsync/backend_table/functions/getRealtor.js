@@ -25,10 +25,18 @@ export function request(ctx) {
  */
 
 export const response = (ctx) => {
+    
+    if (ctx.error){
+        return {
+            data: null,
+            message: ctx.error.message,
+        };
+    }
+    
     if (ctx.result) {
         return {
-            ...ctx.result,
-            
+            data: {...ctx.result},
+            message: "Ok"
         };
     }
 };
