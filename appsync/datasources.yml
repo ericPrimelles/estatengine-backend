@@ -4,8 +4,9 @@ mock:
 BackendDdBbTable:
   type: AMAZON_DYNAMODB
   config:
-    tableName: dvst-estatengine-backend-ddb-${sls:stage}
-    serviceRoleArn: !GetAtt AppsyncPermissionsRole.Arn
+    tableName: dvst-estatengine-backend-${sls:stage}-table
+    serviceRoleArn: 
+      Fn::GetAtt: [AppsyncPermissionsRole, Arn]
     region: ${self:provider.region}
     description: DynamoDB table for the backend data
     
