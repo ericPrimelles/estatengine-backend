@@ -98,6 +98,7 @@ resources:
                     - dynamodb:GetItem
                     - dynamodb:Query
                     - dynamodb:Scan
+                    - dynamodb:DeleteItem
                   Resource:
                     - Fn::GetAtt:
                       - BackendDdBbTable
