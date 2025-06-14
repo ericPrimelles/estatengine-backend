@@ -1,5 +1,6 @@
 extend type Mutation{
     createRealtor(input: CreateRealtorInput!): RealtorResponse
+    deleteRealtor(PK: ID!, SK: ID!): RealtorResponse
 }
 extend type Query {
     getRealtor(PK: ID!, SK: ID!): RealtorResponse
