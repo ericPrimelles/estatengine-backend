@@ -5,8 +5,7 @@ import {util} from "@aws-appsync/utils";
  *  @param ctx the context object holds contextual information about the function invocation.
  */
 export function request(ctx) {
-    const PK = `REALTOR#ACCOUNT#${ctx.identity.username}#`;
-    const SK = `REALTOR#ACCOUNT#${ctx.identity.username}#`;
+    
     return{
         operation : "GetItem",
         key : {
