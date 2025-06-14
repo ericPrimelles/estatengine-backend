@@ -49,6 +49,9 @@ appSync:
     - name: dvst-estatengine-backend-graphqlApi-${sls:stage}-key
       description: API Key for the GraphQL API
       expires: 1Y # 1 year, adjust as needed
+  logging:
+    level: ERROR
+    retentionInDays: 3
   dataSources: 
     - ${file(./appsync/datasources.yml)}
   resolvers:
