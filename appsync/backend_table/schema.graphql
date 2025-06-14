@@ -20,8 +20,8 @@ input CreateRealtorInput {
 }
 
 type Realtor {
-    PK: ID!
-    SK: ID!
+    PK: String!
+    SK: String!
     name: String!
     midddleName: String
     lastName: String!
