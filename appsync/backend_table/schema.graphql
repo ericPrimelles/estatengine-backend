@@ -1,11 +1,19 @@
 extend type Mutation{
     createRealtor(input: CreateRealtorInput!): RealtorResponse
     deleteRealtor(PK: ID!, SK: ID!): RealtorResponse
+    createCustomer(input: CreateCustomerInput!): CustomerResponse
 }
 extend type Query {
     getRealtor(PK: ID!, SK: ID!): RealtorResponse
 }
 
+# General Data Types
+interface Response {
+    
+    message: String
+}
+
+## Realtor endpoints
 input CreateRealtorInput {
     name: String!
     midddleName: String
@@ -36,7 +44,90 @@ type Realtor {
     corporativeColors: [String]!
 }
 
-type RealtorResponse {
+type RealtorResponse implements Response {
     data: Realtor
     message: String
 }
+
+## Customer endpoints
+interface CreateCustomerInput {
+    name: String!
+    midddleName: String
+    lastName: String!
+    email: String!
+    phone: String!
+    preferredContactMethod: String!
+    preferredLanguage: String!
+    
+    labels: [String]
+}
+enum CustomerType {
+    SELLER
+    BUYER
+    LANDLORD
+    TENANT
+    INVESTOR
+}
+input CreateSellerCustomerInput implements CreateCustomerInput {
+    name: String!
+    midddleName: String
+    lastName: String!
+    email: String!
+    phone: String!
+    preferredContactMethod: String!
+    preferredLanguage: String!
+    customerType: CustomerType!
+    labels: [String]
+}
+
+type FinancialProfile {
+    budget: Float
+    preferredPaymentMethod: String
+    downPayment: Float
+    ##TODO financing data
+}
+
+type Address {
+    street: String
+    city: String
+    state: String
+    zipCode: String
+}
+
+enum PropertyStatus {
+    NEW
+    USED
+    REFURBISHED
+    UNDER_CONSTRUCTION
+}
+type PropertyPreferences {
+    zones: [Address]
+    yearBuiltRangeMin: Int
+    yearBuiltRangeMax: Int
+    propertyStatus: [PropertyStatus]
+    #TODO: Community preferences
+    #TODO: School preferences
+    noOfBedroomsMin: Int
+    noOfBedroomsMax: Int
+    noOfBathroomsMin: Int
+    noOfBathroomsMax: Int
+    minSquareFeet: Int
+    maxSquareFeet: Int
+    minLotSize: Int
+    maxLotSize: Int
+    generalDescriptions: String
+}
+input CreateBuyerCustomerInput implements CreateCustomerInput {
+    name: String!
+    midddleName: String
+    lastName: String!
+    email: String!
+    phone: String!
+    preferredContactMethod: String!
+    preferredLanguage: String!
+    customerType: CustomerType!
+    labels: [String]
+    financialProfile: FinancialProfile
+    propertyPreferences: PropertyPreferences
+}
+
