@@ -1,7 +1,7 @@
 extend type Mutation{
     createRealtor(input: CreateRealtorInput!): RealtorResponse
     deleteRealtor(PK: ID!, SK: ID!): RealtorResponse
-    createCustomer(input: CreateCustomerInput!): CustomerResponse
+    createSellerCustomer(input: CreateSellerCustomerInput!): SellerCustomerResponse
 }
 extend type Query {
     getRealtor(PK: ID!, SK: ID!): RealtorResponse
@@ -131,3 +131,7 @@ input CreateBuyerCustomerInput implements CreateCustomerInput {
     propertyPreferences: PropertyPreferences
 }
 
+type SellerCustomerResponse implements Response {
+    data: SellerCustomer
+    message: String
+}

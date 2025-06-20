@@ -1,3 +1,4 @@
+# Realtor
 createRealtorFunction:
   dataSource: BackendDdBbTable
   code: appsync/backend_table/functions/createRealtor.js
@@ -9,3 +10,8 @@ getRealtorFunction:
 deleteRealtorFunction:
   dataSource: BackendDdBbTable
   code: appsync/backend_table/functions/deleteRealtor.js
+
+# Customers
+createSellerCustomerFunction:
+  dataSource: BackendDdBbTable
+  code: appsync/backend_table/functions/createCustomer.js

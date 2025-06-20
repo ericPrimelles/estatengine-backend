@@ -1,3 +1,4 @@
+# Realtors
 Mutation.createRealtor:
   dataSource: BackendDdBbTable
   functions:
@@ -9,10 +10,17 @@ Mutation.deleteRealtor:
   functions:
     - deleteRealtorFunction
   code: appsync/backend_table/pipelines/Mutation.deleteRealtor.js
-  
+ 
 Query.getRealtor:
   dataSource: BackendDdBbTable
   functions:
     - getRealtorFunction
   code: appsync/backend_table/pipelines/Query.getRealtor.js
 
+
+#Customers
+Mutation.createSellerCustomer:
+  dataSource: BackendDdBbTable
+  functions:
+    - createSellerCustomerFunction
+  code: appsync/backend_table/pipelines/Mutation.createSellerCustomer.js
