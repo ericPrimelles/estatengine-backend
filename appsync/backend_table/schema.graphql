@@ -70,12 +70,12 @@ input CreateSellerCustomerInput {
     labels: [String]
 }
 
-type FinancialProfile {
-    budget: Float
-    preferredPaymentMethod: String
-    downPayment: Float
-    ##TODO financing data
-}
+# type FinancialProfile {
+#     budget: Float
+#     preferredPaymentMethod: String
+#     downPayment: Float
+#     ##TODO financing data
+# }
 
 type Address {
     street: String
@@ -90,36 +90,36 @@ enum PropertyStatus {
     REFURBISHED
     UNDER_CONSTRUCTION
 }
-type PropertyPreferences {
-    zones: [Address]
-    yearBuiltRangeMin: Int
-    yearBuiltRangeMax: Int
-    propertyStatus: [PropertyStatus]
-    #TODO: Community preferences
-    #TODO: School preferences
-    noOfBedroomsMin: Int
-    noOfBedroomsMax: Int
-    noOfBathroomsMin: Int
-    noOfBathroomsMax: Int
-    minSquareFeet: Int
-    maxSquareFeet: Int
-    minLotSize: Int
-    maxLotSize: Int
-    generalDescriptions: String
-}
-input CreateBuyerCustomerInput {
-    name: String!
-    midddleName: String
-    lastName: String!
-    email: String!
-    phone: String!
-    preferredContactMethod: String!
-    preferredLanguage: String!
-    customerType: CustomerType!
-    labels: [String]
-    financialProfile: FinancialProfile
-    propertyPreferences: PropertyPreferences
-}
+# type PropertyPreferences {
+#     zones: [Address]
+#     yearBuiltRangeMin: Int
+#     yearBuiltRangeMax: Int
+#     propertyStatus: [PropertyStatus]
+#     #TODO: Community preferences
+#     #TODO: School preferences
+#     noOfBedroomsMin: Int
+#     noOfBedroomsMax: Int
+#     noOfBathroomsMin: Int
+#     noOfBathroomsMax: Int
+#     minSquareFeet: Int
+#     maxSquareFeet: Int
+#     minLotSize: Int
+#     maxLotSize: Int
+#     generalDescriptions: String
+# }
+# input CreateBuyerCustomerInput {
+#     name: String!
+#     midddleName: String
+#     lastName: String!
+#     email: String!
+#     phone: String!
+#     preferredContactMethod: String!
+#     preferredLanguage: String!
+#     customerType: CustomerType!
+#     labels: [String]
+#     financialProfile: FinancialProfile
+#     propertyPreferences: PropertyPreferences
+# }
 
 type SellerCustomer {
     PK: String!
