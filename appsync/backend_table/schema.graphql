@@ -121,6 +121,19 @@ input CreateBuyerCustomerInput {
     propertyPreferences: PropertyPreferences
 }
 
+type SellerCustomer {
+    PK: String!
+    SK: String!
+    name: String!
+    midddleName: String
+    lastName: String!
+    email: String!
+    phone: String!
+    preferredContactMethod: String!
+    preferredLanguage: String!
+    customerType: CustomerType!
+    labels: [String]
+}
 type SellerCustomerResponse implements Response {
     data: SellerCustomer
     message: String
