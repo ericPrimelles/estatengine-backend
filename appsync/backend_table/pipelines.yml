@@ -22,5 +22,5 @@ Query.getRealtor:
 Mutation.createSellerCustomer:
   dataSource: BackendDdBbTable
   functions:
-    - createSellerCustomerFunction
+    - createCustomerFunction
   code: appsync/backend_table/pipelines/Mutation.createSellerCustomer.js

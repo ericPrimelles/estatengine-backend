@@ -12,6 +12,6 @@ deleteRealtorFunction:
   code: appsync/backend_table/functions/deleteRealtor.js
 
 # Customers
-createSellerCustomerFunction:
+createCustomerFunction:
   dataSource: BackendDdBbTable
   code: appsync/backend_table/functions/createCustomer.js
