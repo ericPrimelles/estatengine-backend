@@ -50,17 +50,7 @@ type RealtorResponse implements Response {
 }
 
 ## Customer endpoints
-interface CreateCustomerInput {
-    name: String!
-    midddleName: String
-    lastName: String!
-    email: String!
-    phone: String!
-    preferredContactMethod: String!
-    preferredLanguage: String!
-    
-    labels: [String]
-}
+
 enum CustomerType {
     SELLER
     BUYER
@@ -68,7 +58,7 @@ enum CustomerType {
     TENANT
     INVESTOR
 }
-input CreateSellerCustomerInput implements CreateCustomerInput {
+input CreateSellerCustomerInput {
     name: String!
     midddleName: String
     lastName: String!
@@ -117,7 +107,7 @@ type PropertyPreferences {
     maxLotSize: Int
     generalDescriptions: String
 }
-input CreateBuyerCustomerInput implements CreateCustomerInput {
+input CreateBuyerCustomerInput {
     name: String!
     midddleName: String
     lastName: String!
