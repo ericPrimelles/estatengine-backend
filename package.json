@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "aws-appsync": "^4.1.10"
+    "aws-appsync": "^4.1.10",
+    "serverless-python-requirements": "4.3.0" 
   }
 }
