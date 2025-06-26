@@ -42,19 +42,19 @@ plugins:
 functions:
   openai:
     name: dvst-estatengine-backend-openai-proxy-${sls:stage}
-    handler: src/openai_proxy/openai_handler.handler
-    # package: 
-    #   # include:
-    #   #   - src/openai_proxy/*
-    #   artifact: src/openai_proxy/openai_handler.zip
+    handler: src/openai_proxy/openai_proxy.handler
+    package: 
+      # include:
+      #   - src/openai_proxy/*
+      artifact: src/dist/openai_proxy.zip
 
   search_engine:
     name: dvst-estatengine-backend-search-engine-${sls:stage}
     handler: src/search_engine/search_engine.handler
-    # package:
-    #   # include:
-    #   #   - src/search_engine/*
-    #   artifact: src/search_engine/search_handler.zip
+    package:
+      # include:
+      #   - src/search_engine/*
+      artifact: src/dist/search_engine.zip
     environment:
       GPSE_API_KEY: ${env:GPSE_API_KEY}
       GOOGLE_API_ID: ${env:GOOGLE_API_ID}

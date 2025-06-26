@@ -62,6 +62,10 @@ jobs:
                 
                 export GPSE_API_KEY=${{ secrets.GPSE_API_KEY }}
                 export GOOGLE_API_ID=${{ secrets.GOOGLE_API_ID }}
+                cd src
+                chmod +x package_lambdas.sh
+                ./package_lambdas.sh
+                cd ..
                 npm i -g serverless 
                 
 
