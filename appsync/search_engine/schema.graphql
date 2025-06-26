@@ -1,0 +1,17 @@
+extend type Query {
+    getHousesForSaleListings(
+        query: String!
+        page: Int!
+        limit: Int!
+    ): [HouseForSaleListing]!
+}
+
+type HouseForSaleListingResponse {
+    data: [HouseForSaleListing]!
+    message: String!
+}
+type HouseForSaleListing {
+    title: String!
+    description: String!
+    url: String!
+}

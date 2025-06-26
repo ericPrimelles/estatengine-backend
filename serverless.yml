@@ -20,7 +20,7 @@ provider:
             - logs:CreateLogGroup
             - logs:CreateLogStream
             - logs:PutLogEvents
-          Resource: "arn:aws:logs:*"
+          Resource: "arn:aws:logs"
 plugins:
   - serverless-appsync-plugin
 package:
@@ -66,8 +66,10 @@ appSync:
     - ${file(./appsync/datasources.yml)}
   resolvers:
     - ${file(./appsync/backend_table/pipelines.yml)}
+    - ${file(./appsync/search_engine/pipelines.yml)}
   pipelineFunctions:
     - ${file(./appsync/backend_table/functions.yml)}
+    - ${file(./appsync/search_engine/functions.yml)}
 
 resources:
   Resources:
@@ -97,7 +99,7 @@ resources:
                         - Ref: AWS::Region
                         - ":"
                         - Ref: AWS::AccountId
-                        - ":function:dvst-estatengine-backend-openai-proxy-${sls:stage}"
+                        - ":function:*" #dvst-estatengine-backend-openai-proxy-${sls:stage}"
           - PolicyName: AppsyncDynamoDBPolicy
             PolicyDocument:
               Version: '2012-10-17'

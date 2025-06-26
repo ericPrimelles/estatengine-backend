@@ -9,4 +9,12 @@ BackendDdBbTable:
       Fn::GetAtt: [AppsyncPermissionsRole, Arn]
     region: ${self:provider.region}
     description: DynamoDB table for the backend data
-    
+
+SearchEngine:
+  type: AWS_LAMBDA
+  config:
+    functionName: dvst-estatengine-backend-search-engine-${sls:stage}
+    serviceRoleArn: 
+      Fn::GetAtt: [AppsyncPermissionsRole, Arn]
+    region: ${self:provider.region}
+    description: Lambda function for the search engine

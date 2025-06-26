@@ -1,0 +1,43 @@
+import {util} from "@aws-appsync/utils";
+import { version } from "react";
+
+/**
+ * Called before the request function of the first AppSync function in the pipeline.
+ *  @param ctx the context object holds contextual information about the function invocation.
+ */
+export function request(ctx) {
+    
+    return{
+        version : "2018-05-29",
+        operation : "Invoke",
+        payload : {
+            field: "getHousesForSaleListings",
+            arguments: util.toJson(ctx.args),
+        }
+
+    };
+    
+}
+
+
+/**
+ * Called after the request function of the first AppSync function in the pipeline.
+ *  @param ctx the context object holds contextual information about the function invocation.
+ */
+
+export const response = (ctx) => {
+    
+    if (ctx.error){
+        return {
+            data: null,
+            message: ctx.error.message,
+        };
+    }
+    
+    if (ctx.result) {
+        return {
+            data: ctx.result.body,
+            message: "Ok"
+        };
+    }
+};
