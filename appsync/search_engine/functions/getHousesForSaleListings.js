@@ -35,16 +35,7 @@ export const response = (ctx) => {
     }
     
     if (ctx.result) {
-        let items = ctx.result.body.items;
-        if (items && items.length > 0) {
-            items = items.map(item => {
-                return {
-                    title : item.title,
-                    description : item.snippet,
-                    link : item.link,
-                };
-            });
-        }
+        
         return {
             data: items,
             message: "Ok"

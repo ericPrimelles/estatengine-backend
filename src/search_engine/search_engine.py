@@ -28,9 +28,15 @@ def handler(event, context):
             }
         )
         results = req.json()
+        items = results.get('items', [])
         return {
             'statusCode': 200,
-            'body': results
+            'body': [{
+                'title': item.get('title', ''),
+                'url': item.get('link', ''),
+                'description': item.get('snippet', '')
+            } for item in items]
+            
         }
     except Exception as e:
         print(f"Error processing search request: {e}")
