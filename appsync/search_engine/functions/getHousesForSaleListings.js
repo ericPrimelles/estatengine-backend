@@ -37,7 +37,7 @@ export const response = (ctx) => {
     if (ctx.result) {
         
         return {
-            data: items,
+            data: ctx.result,
             message: "Ok"
         };
     }
