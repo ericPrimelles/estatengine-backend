@@ -12,7 +12,7 @@ def handler(event, context):
         dict: A response containing the search results.
     """
     try:
-        GPSE_APIKERT = os.getenv('GPSE_APIKEY')
+        GPSE_APIKEY = os.getenv('GPSE_API_KEY')
         API_ID = os.getenv('GOOGLE_API_ID')
         URL = 'https://www.googleapis.com/customsearch/v1'
         max_results = event.get('max_results', 10)
@@ -21,7 +21,7 @@ def handler(event, context):
         req = requests.get(
             URL,
             params={
-                'key': GPSE_APIKERT,
+                'key': GPSE_APIKEY,
                 'cx': API_ID,
                 'q': search_query,
                 'num': max_results
