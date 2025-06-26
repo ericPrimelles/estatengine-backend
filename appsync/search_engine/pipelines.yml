@@ -1,4 +1,4 @@
-Query.getRealtor:
+Query.getHousesForSaleListings:
   dataSource: SearchEngine
   functions:
     - getHousesForSaleListingsFunction
