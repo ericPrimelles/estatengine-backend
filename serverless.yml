@@ -43,7 +43,7 @@ package:
 functions:
   openai:
     name: dvst-estatengine-backend-openai-proxy-${sls:stage}
-    handler: src/openai_proxy/openai_proxy.handler
+    handler: openai_proxy.handler
     package: 
       # include:
       #   - src/openai_proxy/*
@@ -51,7 +51,7 @@ functions:
 
   search_engine:
     name: dvst-estatengine-backend-search-engine-${sls:stage}
-    handler: src/search_engine/search_engine.handler
+    handler: search_engine.handler
     package:
       # include:
       #   - src/search_engine/*
