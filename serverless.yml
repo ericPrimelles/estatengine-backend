@@ -40,7 +40,7 @@ functions:
 
   search_engine:
     name: dvst-estatengine-backend-search-engine-${sls:stage}
-    handler: search_engine_handler.handler
+    handler: search_engine.handler
     package:
       include:
         - src/search_engine/*
