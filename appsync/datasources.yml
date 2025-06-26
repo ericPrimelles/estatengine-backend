@@ -13,7 +13,7 @@ BackendDdBbTable:
 SearchEngine:
   type: AWS_LAMBDA
   config:
-    functionArn: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-search-engine-${sls:stage}"
+    functionArn: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-search-engine-${sls:stage}"
     serviceRoleArn: 
       Fn::GetAtt: [AppsyncPermissionsRole, Arn]
     region: ${self:provider.region}
