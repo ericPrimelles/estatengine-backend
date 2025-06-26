@@ -43,14 +43,23 @@ jobs:
                 
                 export STAGE=dev
                 cd src/openai_proxy
-                pip install -r requirements.txt --target .
-                cd ../..
+                mkdir package
+                pip install -r requirements.txt --target package
+                cd package
+                zip -rq ../openai_handler.zip .
+                cd ..
+                zip -gq ../openai_handler.zip openai_handler.py
+                cd ..
 
-                cd src/search_engine
-                pip install -r requirements.txt --target .
+                cd search_engine
+                mkdir package
+                pip install -r requirements.txt --target package
+                cd package
+                zip -rq ../search_handler.zip .
+                cd ..
+                zip -gq ../search_handler.zip search_handler.py
                 cd ../..
-                export GOOGLE_API_ID=${{ secrets.GOOGLE_API_ID }}
-                export GPSE_API_KEY=${{ secrets.GPSE_API_KEY }}
+                
                 npm i -g serverless 
                 sls login 
                 npm install serverless-appsync-plugin ---debug
