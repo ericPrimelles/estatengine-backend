@@ -46,7 +46,7 @@ jobs:
                 pip install -r requirements.txt --target .
                 cd ../..
 
-                d src/search_engine
+                cd src/search_engine
                 pip install -r requirements.txt --target .
                 cd ../..
                 export GOOGLE_API_ID=${{ secrets.GOOGLE_API_ID }}
