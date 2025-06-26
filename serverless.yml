@@ -38,6 +38,16 @@ functions:
       include:
         - src/openai_proxy/*
 
+  search_engine:
+    name: dvst-estatengine-backend-search-engine-${sls:stage}
+    handler: search_engine_handler.handler
+    package:
+      include:
+        - src/search_engine/*
+    environment:
+      GPSE_API_KEY: ${env:GPSE_API_KEY}
+      GOOGLE_API_ID: ${env:GOOGLE_API_ID}
+
 appSync:
   name: dvst-estatengine-backend-graphqlApi-${sls:stage}
   schema:
