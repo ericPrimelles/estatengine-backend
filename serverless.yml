@@ -23,14 +23,14 @@ provider:
           Resource: "arn:aws:logs"
 plugins:
   - serverless-appsync-plugin
-  - serverless-python-requirements
+  #- serverless-python-requirements
 
-custom:
-  pythonRequirements:
-    dockerizePip: false
-    #pyhtonBin: python3.9
-    zip: true
-    slim: true
+# custom:
+#   pythonRequirements:
+#     dockerizePip: false
+#     #pyhtonBin: python3.9
+#     zip: true
+#     slim: true
 
 package:
   individually: true 
