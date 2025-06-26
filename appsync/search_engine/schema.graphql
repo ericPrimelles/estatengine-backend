@@ -3,7 +3,7 @@ extend type Query {
         query: String!
         page: Int!
         limit: Int!
-    ): [HouseForSaleListing]!
+    ): HouseForSaleListingResponse!
 }
 
 type HouseForSaleListingResponse {
@@ -13,5 +13,5 @@ type HouseForSaleListingResponse {
 type HouseForSaleListing {
     title: String!
     description: String!
-    url: String!
+    url: AWSURL!
 }
