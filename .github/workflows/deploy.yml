@@ -60,7 +60,8 @@ jobs:
                 # zip -gq ../search_engine.zip search_engine.py
                 # cd ../..
                 
-                
+                export GPSE_API_KEY=${{ secrets.GPSE_API_KEY }}
+                export GOOGLE_API_ID=${{ secrets.GOOGLE_API_ID }}
                 npm i -g serverless 
                 pip install -r requirements.txt
                 sls login 
