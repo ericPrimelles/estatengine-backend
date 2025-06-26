@@ -46,7 +46,7 @@ export const response = (ctx) => {
             });
         }
         return {
-            data: ctx.result.body,
+            data: items,
             message: "Ok"
         };
     }
