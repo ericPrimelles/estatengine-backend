@@ -12,7 +12,7 @@ export function request(ctx) {
         operation : "Invoke",
         payload : {
             field: "getHousesForSaleListings",
-            arguments: util.toJson(ctx.args),
+            arguments: ctx.args,
         }
 
     };
