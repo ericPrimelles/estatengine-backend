@@ -2,4 +2,4 @@ Query.getHousesForSaleListings:
   dataSource: SearchEngine
   functions:
     - getHousesForSaleListingsFunction
-  code: appsync/backend_table/pipelines/Query.getHousesForSaleListings.js
+  code: appsync/search_engine/pipelines/Query.getHousesForSaleListings.js
