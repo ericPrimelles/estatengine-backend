@@ -1,5 +1,5 @@
 import {util} from "@aws-appsync/utils";
-import { version } from "react";
+
 
 /**
  * Called before the request function of the first AppSync function in the pipeline.
