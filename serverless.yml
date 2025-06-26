@@ -28,7 +28,7 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: false
-    pyhtonBin: python3.9
+    #pyhtonBin: python3.9
     zip: true
     slim: true
 
