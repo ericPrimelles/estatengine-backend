@@ -32,12 +32,12 @@ plugins:
 #     zip: true
 #     slim: true
 
-package:
-  individually: true 
-  exclude:
-    - ./**
-  include:
-    - appsync/*
+# package:
+#   individually: true 
+#   exclude:
+#     - ./**
+#   include:
+#     - appsync/*
    
 functions:
   openai:
