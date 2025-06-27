@@ -11,15 +11,14 @@ export function request(ctx) {
         version : "2018-05-29",
         operation : "Invoke",
         payload : {
-            field: "getHousesForSaleListings",
-            arguments: {
-                city: ctx.args.city,
-                state: ctx.args.state,
-                zipcode: ctx.args.zipcode,
-                page: ctx.args.page,
-                limit: ctx.args.limit,
-                query: query,
-            },
+            field: "getHousesForSaleListings",         
+            city: ctx.args.city,
+            state: ctx.args.state,
+            zipcode: ctx.args.zipcode,
+            page: ctx.args.page,
+            limit: ctx.args.limit,
+            query: query,
+           
         }
 
     };
@@ -44,7 +43,7 @@ export const response = (ctx) => {
     if (ctx.result) {
         
         return {
-            data: ctx.result.bodys,
+            data: ctx.result.body,
             message: "Ok"
         };
     }
