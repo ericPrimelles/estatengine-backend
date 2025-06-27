@@ -107,7 +107,7 @@ resources:
                     - lambda:InvokeFunction
                   Resource:
                     - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-openai-proxy-${sls:stage}"
-                    - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-search-engine-${sls:stage}"
+                    - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-search-engine-${sls:stage}"
                     
           - PolicyName: AppsyncDynamoDBPolicy
             PolicyDocument:
