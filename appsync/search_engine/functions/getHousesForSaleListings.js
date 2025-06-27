@@ -8,24 +8,24 @@ import {util} from "@aws-appsync/utils";
 export function request(ctx) {
     const {bedrooms, bathrooms, minPrice, maxPrice, minSize, maxSize} = ctx.args.preferences || {};
     if (bedrooms && (typeof bedrooms !== 'number' || bedrooms < 0)) {
-        throw new Error("Invalid number of bedrooms");
+        return;
     }
     if (bathrooms && (typeof bathrooms !== 'number' || bathrooms < 0)) {
-        throw new Error("Invalid number of bathrooms");
+        return;
     }
 
     if (minPrice && (typeof minPrice !== 'number' || minPrice < 0)) {
-        throw new Error("Invalid minimum price");
+        return;
     }
     if (maxPrice && (typeof maxPrice !== 'number' || maxPrice < 0)) {
-        throw new Error("Invalid maximum price");
+        return;
     }
 
     if (minSize && (typeof minSize !== 'number' || minSize < 0)) {
-        throw new Error("Invalid minimum size");
+        return;
     }
     if (maxSize && (typeof maxSize !== 'number' || maxSize < 0)) {
-        throw new Error("Invalid maximum size");
+        return;
     }
 
     let preferences_string = "";
