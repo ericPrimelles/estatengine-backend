@@ -1,4 +1,8 @@
-import os, requests
+import os, requests, re
+
+
+def is_zillow_property(url):
+    return re.match(r'https://www\.zillow\.com/homedetails/.+/\d+_zpid/', url)
 
 def handler(event, context):
     """
@@ -15,7 +19,7 @@ def handler(event, context):
         GPSE_APIKEY = os.getenv('GPSE_API_KEY')
         API_ID = os.getenv('GOOGLE_API_ID')
         URL = 'https://www.googleapis.com/customsearch/v1'
-        max_results = event.get('max_results', 10)
+        max_results = event.get('max_results', 100)
         search_query = event.get('query', '')
 
         req = requests.get(
@@ -35,7 +39,7 @@ def handler(event, context):
                 'title': item.get('title', ''),
                 'url': item.get('link', ''),
                 'description': item.get('snippet', '')
-            } for item in items]
+            } for item in items if is_zillow_property(item.get('link', ''))]
             
         }
     except Exception as e:
