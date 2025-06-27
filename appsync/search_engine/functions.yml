@@ -1,0 +1,3 @@
+getHousesForSaleListingsFunction:
+  dataSource: SearchEngine
+  code: appsync/search_engine/functions/getHousesForSaleListings.js

@@ -1,0 +1,20 @@
+mock:
+  type: NONE
+
+BackendDdBbTable:
+  type: AMAZON_DYNAMODB
+  config:
+    tableName: dvst-estatengine-backend-${sls:stage}-table
+    serviceRoleArn: 
+      Fn::GetAtt: [AppsyncPermissionsRole, Arn]
+    region: ${self:provider.region}
+    description: DynamoDB table for the backend data
+
+SearchEngine:
+  type: AWS_LAMBDA
+  config:
+    functionArn: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-search-engine-${sls:stage}"
+    serviceRoleArn: 
+      Fn::GetAtt: [AppsyncPermissionsRole, Arn]
+    region: ${self:provider.region}
+    description: Lambda function for the search engine

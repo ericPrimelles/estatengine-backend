@@ -1,0 +1,147 @@
+service: dvst-estatengine-backend-${env:STAGE}  # Change to your project/service name
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: python3.9  # or python3.11, etc.
+  region: us-east-2
+  stage: ${env:STAGE}
+  memorySize: 128
+  timeout: 10
+  environment:
+    STAGE: ${opt:stage, 'dev'}
+    APP_NAME: my-service-name
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: "arn:aws:logs"
+plugins:
+  - serverless-appsync-plugin
+  #- serverless-python-requirements
+
+# custom:
+#   pythonRequirements:
+#     dockerizePip: false
+#     #pyhtonBin: python3.9
+#     zip: true
+#     slim: true
+
+package:
+  individually: true 
+  exclude:
+    - ./**
+  include:
+    - appsync/*
+    - src/dist/*
+   
+functions:
+  openai:
+    name: dvst-estatengine-backend-openai-proxy-${sls:stage}
+    handler: openai_proxy.handler
+    package: 
+      # include:
+      #   - src/openai_proxy/*
+      artifact: src/dist/openai_proxy.zip
+
+  search_engine:
+    name: dvst-estatengine-backend-search-engine-${sls:stage}
+    handler: search_engine.handler
+    package:
+      # include:
+      #   - src/search_engine/*
+      artifact: src/dist/search_engine.zip
+    environment:
+      GPSE_API_KEY: ${env:GPSE_API_KEY}
+      GOOGLE_API_ID: ${env:GOOGLE_API_ID}
+
+appSync:
+  name: dvst-estatengine-backend-graphqlApi-${sls:stage}
+  schema:
+    - ./appsync/schema.graphql
+    - ./appsync/backend_table/schema.graphql
+    - ./appsync/search_engine/schema.graphql
+  authentication:
+    type: API_KEY
+  apiKeys:
+    - name: dvst-estatengine-backend-graphqlApi-${sls:stage}-key
+      description: API Key for the GraphQL API
+      expires: 1Y # 1 year, adjust as needed
+  logging:
+    level: ERROR
+    retentionInDays: 3
+  dataSources: 
+    - ${file(./appsync/datasources.yml)}
+  resolvers:
+    - ${file(./appsync/backend_table/pipelines.yml)}
+    - ${file(./appsync/search_engine/pipelines.yml)}
+  pipelineFunctions:
+    - ${file(./appsync/backend_table/functions.yml)}
+    - ${file(./appsync/search_engine/functions.yml)}
+
+resources:
+  Resources:
+    # Template roles
+    AppsyncPermissionsRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: appsync.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: AppsyncLambdaInvocationPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - lambda:InvokeFunction
+                  Resource:
+                    - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-openai-proxy-${sls:stage}"
+                    - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-search-engine-${sls:stage}"
+                    
+          - PolicyName: AppsyncDynamoDBPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - dynamodb:PutItem
+                    - dynamodb:GetItem
+                    - dynamodb:Query
+                    - dynamodb:Scan
+                    - dynamodb:DeleteItem
+                  Resource:
+                    - Fn::GetAtt:
+                      - BackendDdBbTable
+                      - Arn
+                    
+    
+    BackendDdBbTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: dvst-estatengine-backend-${sls:stage}-table
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TimeToLiveSpecification:
+          AttributeName: ttl
+          Enabled: true
+        

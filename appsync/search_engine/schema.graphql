@@ -1,0 +1,28 @@
+extend type Query {
+    getHousesForSaleListings(
+        city: String
+        state: String
+        zipcode: String
+        page: Int!
+        limit: Int!
+        preferences: HouseDetailsInput
+    ): HouseForSaleListingResponse!
+}
+
+input HouseDetailsInput {
+    bedrooms: Int
+    bathrooms: Int
+    minPrice: Float
+    maxPrice: Float
+    minSize: Int
+    maxSize: Int
+}
+type HouseForSaleListingResponse {
+    data: [HouseForSaleListing]
+    message: String!
+}
+type HouseForSaleListing {
+    title: String!
+    description: String!
+    url: AWSURL!
+}
