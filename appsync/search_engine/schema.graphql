@@ -5,11 +5,11 @@ extend type Query {
         zipcode: String
         page: Int!
         limit: Int!
-        preferences: HouseDetails
+        preferences: HouseDetailsInput
     ): HouseForSaleListingResponse!
 }
 
-type HouseDetails {
+input HouseDetailsInput {
     bedrooms: Int
     bathrooms: Int
     minPrice: Float
