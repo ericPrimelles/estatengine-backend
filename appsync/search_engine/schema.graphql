@@ -1,13 +1,15 @@
 extend type Query {
     getHousesForSaleListings(
-        query: String!
+        city: String
+        state: String
+        zipcode: String
         page: Int!
         limit: Int!
     ): HouseForSaleListingResponse!
 }
 
 type HouseForSaleListingResponse {
-    data: [HouseForSaleListing]!
+    data: [HouseForSaleListing]
     message: String!
 }
 type HouseForSaleListing {

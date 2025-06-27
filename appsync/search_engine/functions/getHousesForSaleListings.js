@@ -6,13 +6,20 @@ import {util} from "@aws-appsync/utils";
  *  @param ctx the context object holds contextual information about the function invocation.
  */
 export function request(ctx) {
-    
+    let query = `houses for sale in ${ctx.args.city}, ${ctx.args.state} ${ctx.args.zipcode}`;
     return{
         version : "2018-05-29",
         operation : "Invoke",
         payload : {
             field: "getHousesForSaleListings",
-            arguments: ctx.args,
+            arguments: {
+                city: ctx.args.city,
+                state: ctx.args.state,
+                zipcode: ctx.args.zipcode,
+                page: ctx.args.page,
+                limit: ctx.args.limit,
+                query: query,
+            },
         }
 
     };
@@ -37,7 +44,7 @@ export const response = (ctx) => {
     if (ctx.result) {
         
         return {
-            data: ctx.result,
+            data: ctx.result.bodys,
             message: "Ok"
         };
     }
