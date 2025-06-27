@@ -5,9 +5,18 @@ extend type Query {
         zipcode: String
         page: Int!
         limit: Int!
+        preferences: HouseDetails
     ): HouseForSaleListingResponse!
 }
 
+type HouseDetails {
+    bedrooms: Int
+    bathrooms: Int
+    minPrice: Float
+    maxPrice: Float
+    minSize: Int
+    maxSize: Int
+}
 type HouseForSaleListingResponse {
     data: [HouseForSaleListing]
     message: String!
