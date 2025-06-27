@@ -19,8 +19,10 @@ def handler(event, context):
         GPSE_APIKEY = os.getenv('GPSE_API_KEY')
         API_ID = os.getenv('GOOGLE_API_ID')
         URL = 'https://www.googleapis.com/customsearch/v1'
-        max_results = event.get('max_results', 100)
+        max_results = event.get('max_results', 10)
         search_query = event.get('query', '')
+        page = event.get('page', 1)
+        start = (page - 1) * max_results + 1
 
         req = requests.get(
             URL,
@@ -28,7 +30,8 @@ def handler(event, context):
                 'key': GPSE_APIKEY,
                 'cx': API_ID,
                 'q': search_query,
-                'num': max_results
+                'num': max_results,
+                'start': start,
             }
         )
         results = req.json()
