@@ -168,7 +168,43 @@ resources:
         EndpointConfiguration:
           Types:
             - REGIONAL
-        Body: ${file(./apigateway/attom_proxy/body.yml)}
+        #Body: ${file(./apigateway/attom_proxy/body.yml)}
+    
+    AttomProxyPropertyResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId: !GetAtt AttomProxyApi.RootResourceId
+        PathPart: property
+        RestApiId: !Ref AttomProxyApi
+    
+    AttomProxyAddressResource:
+      Type: AWS::ApiGateway::Resource
+      Properties:
+        ParentId: !Ref AttomProxyPropertyResource
+        PathPart: address
+        RestApiId: !Ref AttomProxyApi
+    
+    AttomAddressGetMethod:
+      Type: AWS::ApiGateway::Method
+      Properties:
+        HttpMethod: GET
+        ResourceId: !Ref AttomProxyAddressResource
+        RestApiId: !Ref AttomProxyApi
+        AuthorizationType: AWS_IAM
+        RequestParameters:
+          method.request.querystring.postalcode: true
+          method.request.querystring.page: false
+          method.request.querystring.pagesize: false
+        Integration:
+          Type: HTTP_PROXY
+          IntegrationHttpMethod: GET
+          Uri: !Sub "https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address"
+          RequestParameters:
+            integration.request.header.Accept: "'application/json'"
+            integration.request.header.apikey: "'${env.ATTOM_APIKEY}'"
+          PassthroughBehavior: WHEN_NO_MATCH
+        MethodResponses:
+          - StatusCode: 200
     
     AttomProxyDeployment:
       Type: AWS::ApiGateway::Deployment
