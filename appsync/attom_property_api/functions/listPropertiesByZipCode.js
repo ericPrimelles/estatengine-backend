@@ -13,7 +13,7 @@ export function request(ctx) {
         method: 'GET',
         headers: {
             "Accept": "application/json",
-            "apikey": process.env.AT_API_KEY
+            "apikey": ctx.env.AT_API_KEY
         },
         resourcePath: resourcePath
 
