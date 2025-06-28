@@ -7,6 +7,8 @@ paths:
   /property/address:
     get:
       summary: List properties by zip code
+      security:
+        - sigv4: []
       description: Retrieve a list of properties based on the provided zip code, page, and limit.
       parameters:
         - name: postalcode
@@ -36,10 +38,10 @@ paths:
         type: http_proxy
         httpMethod: POST
         uri: https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address
-        requestParameters:
-          integration.request.querystring.postalcode: method.request.querystring.postalcode
-          integration.request.querystring.page: method.request.querystring.page
-          integration.request.querystring.pagesize: method.request.querystring.pagesize
+        # requestParameters:
+        #   integration.request.querystring.postalcode: method.request.querystring.postalcode
+        #   integration.request.querystring.page: method.request.querystring.page
+        #   integration.request.querystring.pagesize: method.request.querystring.pagesize
         requestHeaders:
           Accept: "'application/json'"
           apikey: "'${env.ATTOM_API_KEY}'"
