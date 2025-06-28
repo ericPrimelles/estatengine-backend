@@ -22,6 +22,6 @@ SearchEngine:
 AttomPropertyAPI:
   type: HTTP
   config:
-    endpoint: https://api.gateway.attomdata.com/propertyapi/v1.0.0/
+    endpoint: https://api.gateway.attomdata.com/propertyapi/v1.0.0
     serviceRoleArn: 
       Fn::GetAtt: [AppsyncPermissionsRole, Arn]
