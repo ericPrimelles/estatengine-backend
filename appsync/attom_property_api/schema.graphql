@@ -20,7 +20,7 @@ type Identifier {
     attomId: String
 }
 
-type Address {
+type ATAddress {
     country: String
     countrySubd: String
     line1: String
@@ -60,7 +60,7 @@ type Vintage {
 
 type Property {
     identifier: Identifier
-    address: Address
+    address: ATAddress
     location: Loication
     vintage: Vintage
 }
