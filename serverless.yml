@@ -208,13 +208,16 @@ resources:
     
     AttomProxyDeployment:
       Type: AWS::ApiGateway::Deployment
-      DependsOn: AttomProxyApi  # Ensure the API is created first
+      DependsOn: 
+        - AttomProxyApi  # Ensure the API is created first
+        - AttomAddressGetMethod  # Ensure the method is created before deployment
       Properties:
         RestApiId: !Ref AttomProxyApi
         StageName: dummy  # Needed but will be overridden; we define a real Stage below
 
     AttomProxyStage:
       Type: AWS::ApiGateway::Stage
+      DependsOn: AttomProxyDeployment
       Properties:
         StageName: !Sub ${sls:stage}
         RestApiId: !Ref AttomProxyApi
