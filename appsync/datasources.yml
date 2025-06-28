@@ -18,3 +18,10 @@ SearchEngine:
       Fn::GetAtt: [AppsyncPermissionsRole, Arn]
     region: ${self:provider.region}
     description: Lambda function for the search engine
+
+AttomPropertyAPI:
+  type: HTTP
+  config:
+    endpoint: https://api.gateway.attomdata.com/propertyapi/v1.0.0/
+    serviceRoleArn: 
+      Fn::GetAtt: [AppsyncPermissionsRole, Arn]
