@@ -150,4 +150,15 @@ resources:
         TimeToLiveSpecification:
           AttributeName: ttl
           Enabled: true
-        
+
+    AttomProxyApi:
+      Type: AWS::ApiGateway::RestApi
+      Properties:
+        Name: dvst-estatengine-backend-attom-proxy-${sls:stage}
+        Description: API for Attom Property Data
+        FailOnWarnings: true
+        EndpointConfiguration:
+          Types:
+            - REGIONAL
+        Body: ${file(./apigateway/attom_proxy/body.yml)}
+    
