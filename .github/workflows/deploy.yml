@@ -4,7 +4,7 @@ on:
     push:
         branches:
             - main
-            - openai-proxy
+            - attom_proxy
 jobs:
     deploy:
         name: Deploy Backend
@@ -45,6 +45,7 @@ jobs:
                                 
                 export GPSE_API_KEY=${{ secrets.GPSE_API_KEY }}
                 export GOOGLE_API_ID=${{ secrets.GOOGLE_API_ID }}
+                export ATTOM_APIKEY=${{ secrets.ATTOM_APIKEY }}
                 cd src
                 chmod +x package_lambdas.sh
                 ./package_lambdas.sh

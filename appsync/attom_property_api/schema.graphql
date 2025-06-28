@@ -1,0 +1,66 @@
+extend type Query{
+    listPropertiesByZipcode(
+        zipcode: String!
+        page: Int!
+        limit: Int!
+    ): PropertyResponse!
+
+}
+
+type PropertyResponse{
+    data: [Property]
+    message: String
+}
+
+
+type Identifier {
+    id : String
+    fips: String
+    apn: String
+    attomId: String
+}
+
+type Address {
+    country: String
+    countrySubd: String
+    line1: String
+    line2: String
+    locality: String
+    matchCode: String
+    oneLine: String
+    postal1: String
+    postal2: String
+    postal3: String
+}
+
+type GeoIdV4 {
+    CO: String
+    CS: String
+    DB: String
+    N4: String
+    PL: String
+    SB: String
+    ZI: String
+}
+type Loication {
+    accuracy: String
+    latitude: String
+    longitude: String
+    distance: Float
+    geoid: String
+    geoIdV4 : GeoIdV4
+
+
+}
+
+type Vintage {
+    lastModified: AWSDate
+    pubUpDate: AWSDate
+}
+
+type Property {
+    identifier: Identifier
+    address: Address
+    location: Loication
+    vintage: Vintage
+}

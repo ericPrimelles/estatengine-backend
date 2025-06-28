@@ -66,6 +66,7 @@ appSync:
     - ./appsync/schema.graphql
     - ./appsync/backend_table/schema.graphql
     - ./appsync/search_engine/schema.graphql
+    - ./appsync/attom_property_api/schema.graphql
   authentication:
     type: API_KEY
   apiKeys:
@@ -80,9 +81,14 @@ appSync:
   resolvers:
     - ${file(./appsync/backend_table/pipelines.yml)}
     - ${file(./appsync/search_engine/pipelines.yml)}
+    - ${file(./appsync/attom_property_api/pipelines.yml)}
   pipelineFunctions:
     - ${file(./appsync/backend_table/functions.yml)}
     - ${file(./appsync/search_engine/functions.yml)}
+    - ${file(./appsync/attom_property_api/functions.yml)}
+  environment:
+    AT_API_KEY: ${env:ATTOM_APIKEY}
+  
 
 resources:
   Resources:
