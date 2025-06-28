@@ -22,6 +22,11 @@ SearchEngine:
 AttomPropertyAPI:
   type: HTTP
   config:
-    endpoint: https://api.gateway.attomdata.com/propertyapi/v1.0.0
+    endpoint: !Sub "https://${AttomProxyApi}.execute-api.${AWS::Region}.amazonaws.com/${sls:stage}"
     serviceRoleArn: 
       Fn::GetAtt: [AppsyncPermissionsRole, Arn]
+    authenticationConfig:
+      authorizationType: AWS_IAM
+      awsIamConfig:
+        signingRegion: ${self:provider.region}
+        signingServiceName: execute-api
