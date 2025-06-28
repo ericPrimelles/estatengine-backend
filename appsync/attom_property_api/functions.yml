@@ -1,3 +1,3 @@
 listPropertiesByZipCodeFunction:
   dataSource: AttomPropertyAPI
-  code: appsync/attom_property_api/functions/listPropertyByZipCode.js
+  code: appsync/attom_property_api/functions/listPropertiesByZipCode.js
