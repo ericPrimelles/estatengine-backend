@@ -1,5 +1,5 @@
-Query.listPropertyByZipCode:
+Query.listPropertiesByZipCode:
   dataSource: AttomPropertyAPI
   functions:
-    - listPropertyByZipCodeFunction
-  code: appsync/attom_property_api/pipelines/Query.listPropertyByZipCode.js
+    - listPropertiesByZipCodeFunction
+  code: appsync/attom_property_api/pipelines/Query.listPropertiesByZipCode.js
