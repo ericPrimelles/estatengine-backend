@@ -170,23 +170,18 @@ resources:
             - REGIONAL
         Body: ${file(./apigateway/attom_proxy/body.yml)}
     
-    # AttomProxyDeployment:
-    #   Type: AWS::ApiGateway::Deployment
-    #   DependsOn: AttomProxyApi  # Ensure the API is created first
-    #   Properties:
-    #     RestApiId: !Ref AttomProxyApi
-    #     StageName: dummy  # Needed but will be overridden; we define a real Stage below
+    AttomProxyDeployment:
+      Type: AWS::ApiGateway::Deployment
+      DependsOn: AttomProxyApi  # Ensure the API is created first
+      Properties:
+        RestApiId: !Ref AttomProxyApi
+        StageName: dummy  # Needed but will be overridden; we define a real Stage below
 
-    # AttomProxyStage:
-    #   Type: AWS::ApiGateway::Stage
-    #   Properties:
-    #     StageName: !Sub ${sls:stage}
-    #     RestApiId: !Ref AttomProxyApi
-    #     DeploymentId: !Ref AttomProxyDeployment
-    #     MethodSettings:
-    #       - ResourcePath: "/*"
-    #         HttpMethod: "*"
-    #         LoggingLevel: INFO
-    #         DataTraceEnabled: true
-    #         MetricsEnabled: true
+    AttomProxyStage:
+      Type: AWS::ApiGateway::Stage
+      Properties:
+        StageName: !Sub ${sls:stage}
+        RestApiId: !Ref AttomProxyApi
+        DeploymentId: !Ref AttomProxyDeployment
+        
       
