@@ -74,7 +74,7 @@ appSync:
       description: API Key for the GraphQL API
       expires: 1Y # 1 year, adjust as needed
   logging:
-    level: ERROR
+    level: ALL
     retentionInDays: 3
   dataSources: 
     - ${file(./appsync/datasources.yml)}
