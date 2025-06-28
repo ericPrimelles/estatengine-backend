@@ -11,9 +11,11 @@ export function request(ctx) {
     return{
         version : "2018-05-29",
         method: 'GET',
-        headers: {
-            "Accept": "application/json",
-            "apikey": ctx.env.AT_API_KEY
+        params: {
+            headers: {
+                "Accept": "application/json",
+                "apikey": ctx.env.AT_API_KEY
+            },
         },
         resourcePath: resourcePath
 
