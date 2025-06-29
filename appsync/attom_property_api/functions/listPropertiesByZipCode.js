@@ -7,7 +7,7 @@ import {util} from "@aws-appsync/utils";
  */
 export function request(ctx) {
     const {zipcode, page, limit} = ctx.args;
-    const resourcePath = `/property/address?postalcode=${zipcode}&page=${page}&pagesize=${limit}`;
+    const resourcePath = `/${ctx.env.STAGE}/property/address?postalcode=${zipcode}&page=${page}&pagesize=${limit}`;
     return{
         version : "2018-05-29",
         method: 'GET',

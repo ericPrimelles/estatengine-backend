@@ -22,7 +22,7 @@ SearchEngine:
 AttomPropertyAPI:
   type: HTTP
   config:
-    endpoint: !Sub "https://${AttomProxyApi}.execute-api.${AWS::Region}.amazonaws.com/${sls:stage}"
+    endpoint: !Sub "https://${AttomProxyApi}.execute-api.${AWS::Region}.amazonaws.com"
     serviceRoleArn: 
       Fn::GetAtt: [AppsyncPermissionsRole, Arn]
     authenticationConfig:
