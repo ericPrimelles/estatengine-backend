@@ -32,17 +32,17 @@ export function request(ctx) {
 
 export const response = (ctx) => {
     
-    if (ctx.error){
+    if (ctx.error || ctx.result?.statusCode !== 200) {
         return {
             data: null,
-            message: ctx.error.message,
+            message: ctx.result?.body?.message || "Error fetching properties",
         };
     }
     
-    if (ctx.result) {
+    if (ctx.result && ctx.result.statusCode === 200) {
         
         return {
-            data: ctx.result.property || [],
+            data: ctx.result.body?.property || [],
             message: "Ok"
         };
     }

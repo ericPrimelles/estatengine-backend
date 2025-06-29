@@ -25,7 +25,7 @@ AttomPropertyAPI:
     endpoint: !Sub "https://${AttomProxyApi}.execute-api.${AWS::Region}.amazonaws.com"
     serviceRoleArn: 
       Fn::GetAtt: [AppsyncPermissionsRole, Arn]
-    authenticationConfig:
+    authorizationConfig:
       authorizationType: AWS_IAM
       awsIamConfig:
         signingRegion: ${self:provider.region}
