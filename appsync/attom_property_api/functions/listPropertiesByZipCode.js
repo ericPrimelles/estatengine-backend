@@ -38,11 +38,11 @@ export const response = (ctx) => {
             message: ctx.result?.body?.message || "Error fetching properties",
         };
     }
-    
+    const body = JSON.parse(ctx.result.body);
     if (ctx.result && ctx.result.statusCode === 200) {
         
         return {
-            data: ctx.result.body?.property || [],
+            data: body.property || [],
             message: "Ok"
         };
     }

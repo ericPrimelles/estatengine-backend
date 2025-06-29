@@ -14,7 +14,7 @@ type PropertyResponse{
 
 
 type Identifier {
-    id : String
+    Id : String
     fips: String
     apn: String
     attomId: String
@@ -55,7 +55,7 @@ type Loication {
 
 type Vintage {
     lastModified: AWSDate
-    pubUpDate: AWSDate
+    pubDate: AWSDate
 }
 
 type Property {
