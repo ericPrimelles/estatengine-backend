@@ -27,11 +27,7 @@ jobs:
               uses: actions/setup-node@v4
              
             
-            - name: Install Terraform
-              uses: hashicorp/setup-terraform@v3
-              with:
-                terraform_version: 1.6.6
-            
+                      
             - name: Configure AWS Credentials for ACCESS account
               uses: aws-actions/configure-aws-credentials@v2
               with:
@@ -64,8 +60,8 @@ jobs:
                 cd ..
                 npm i -g serverless 
                 
-                ls src
-                ls src/dist
+                echo $COGNITO_USER_POOL_ID
+                echo $COGNITO_USER_POOL_CLIENT_ID
                 sls login 
                 npm install serverless-appsync-plugin ---debug
                 sls package --stage $STAGE --region $AWS_REGION
