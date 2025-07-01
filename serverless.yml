@@ -74,8 +74,7 @@ appSync:
       description: API Key for the GraphQL API
       expires: 1Y # 1 year, adjust as needed
   additionalAuthentications:
-    - type: AWS_COGNITO_USER_POOLS
-      userPoolConfig:
+    - type: AMAZON_COGNITO_USER_POOLS
         userPoolId: ${env:COGNITO_USER_POOL_ID}
         awsRegion: ${self:provider.region}
         appIdClientRegex: ${env:COGNITO_USER_POOL_CLIENT_ID}
