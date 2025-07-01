@@ -37,8 +37,8 @@ jobs:
             
             - name: Cognito Parameters
               run: |
-                export COGNITO_USER_POOL_ID=$(aws ssm get-parameter --name /dvst/auth/userpool/$STAGE --query Parameter.Value --output text)
-                export COGNITO_USER_POOL_CLIENT_ID=$(aws ssm get-parameter --name /dvst/auth/userpool/client/$STAGE --query Parameter.Value --output text)
+                echo "COGNITO_USER_POOL_ID=$(aws ssm get-parameter --name /dvst/auth/userpool/$STAGE --query Parameter.Value --output text)" >> GITHUB_ENV
+                echo "COGNITO_USER_POOL_CLIENT_ID=$(aws ssm get-parameter --name /dvst/auth/userpool/client/$STAGE --query Parameter.Value --output text) >> GITHUB_ENV"
 
             - name: Configure AWS Credentials
               uses: aws-actions/configure-aws-credentials@v2
@@ -60,8 +60,7 @@ jobs:
                 cd ..
                 npm i -g serverless 
                 
-                echo $COGNITO_USER_POOL_ID
-                echo $COGNITO_USER_POOL_CLIENT_ID
+                
                 sls login 
                 npm install serverless-appsync-plugin ---debug
                 sls package --stage $STAGE --region $AWS_REGION
