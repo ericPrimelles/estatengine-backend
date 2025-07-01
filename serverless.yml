@@ -75,9 +75,10 @@ appSync:
       expires: 1Y # 1 year, adjust as needed
   additionalAuthentications:
     - type: AMAZON_COGNITO_USER_POOLS
-      userPoolId: ${env:COGNITO_USER_POOL_ID}
-      awsRegion: ${self:provider.region}
-      appIdClientRegex: ${env:COGNITO_USER_POOL_CLIENT_ID}
+      config:
+        userPoolId: ${env:COGNITO_USER_POOL_ID}
+        awsRegion: ${self:provider.region}
+        appIdClientRegex: ${env:COGNITO_USER_POOL_CLIENT_ID}
   logging:
     level: ALL
     retentionInDays: 3
