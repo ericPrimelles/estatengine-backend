@@ -26,6 +26,11 @@ provider:
           Action:
             - bedrock:InvokeAgent
           Resource: '*'
+        
+        - Effect:
+          Action:
+            - sts:AssumeRole
+          Resource: ${env:CROSS_ACCOUNT_ROLE}
 plugins:
   - serverless-appsync-plugin
   #- serverless-python-requirements
