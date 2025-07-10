@@ -28,5 +28,5 @@ function package_lambda() {
     
 }
 
-package_lambda openai_proxy
+
 package_lambda search_engine
