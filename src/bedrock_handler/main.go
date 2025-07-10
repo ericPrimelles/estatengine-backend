@@ -8,9 +8,12 @@ import (
 	"sync"
 
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
 type Request struct {
@@ -26,19 +29,39 @@ type Response struct {
 }
 
 var (
-	agentId       = os.Getenv("AGENT_ID")
-	agentAliasId  = os.Getenv("AGENT_ALIAS_ID")
-	agentMemoryId = os.Getenv("AGENT_MEMORY_ID")
+	agentId          = os.Getenv("AGENT_ID")
+	agentAliasId     = os.Getenv("AGENT_ALIAS_ID")
+	agentMemoryId    = os.Getenv("AGENT_MEMORY_ID")
+	crossAccountRole = os.Getenv("CROSS_ACCOUNT_ROLE")
 )
 
-func handler(ctx context.Context, req Request) (Response, error) {
+func getBedrockClientCrossAccount(ctx context.Context, roleArn string) (*bedrockagentruntime.Client, error) {
 	cfg, err := config.LoadDefaultConfig(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	stsClient := sts.NewFromConfig(cfg)
+
+	creds := stscreds.NewAssumeRoleProvider(stsClient, roleArn)
+
+	xCfg := cfg.Copy()
+	xCfg.Credentials = aws.NewCredentialsCache(creds)
+
+	client := bedrockagentruntime.NewFromConfig(xCfg)
+	return client, nil
+}
+
+func handler(ctx context.Context, req Request) (Response, error) {
+	// cfg, err := config.LoadDefaultConfig(ctx)
+	// if err != nil {
+	// 	log.Fatalf("Unable to load AWS SDK config: %v", err)
+	// }
+
+	client, err := getBedrockClientCrossAccount(ctx, crossAccountRole)
 	if err != nil {
 		log.Fatalf("Unable to load AWS SDK config: %v", err)
 	}
-
-	client := bedrockagentruntime.NewFromConfig(cfg)
-
 	type fieldResult struct {
 		field string
 		data  string

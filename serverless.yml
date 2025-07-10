@@ -56,6 +56,7 @@ functions:
     environment:
       AGENT_ID : ${env:AGENT_ID}
       AGENT_ALIAS_ID: ${env:AGENT_ALIAS_ID}
+      CROSS_ACCOUNT_ROLE: ${env:CROSS_ACCOUNT_ROLE}
       
     
     
