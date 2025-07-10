@@ -49,7 +49,7 @@ functions:
   bedrock:
     name: dvst-estatengine-backend-bedrock-handler-${sls:stage}
     handler: src/bedrock_handler/bin/main
-    runtime: go1.x
+    runtime: provided.al2023
     timeout: 30
     environment:
       AGENT_ID : ${env:AGENT_ID}
