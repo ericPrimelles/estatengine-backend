@@ -4,7 +4,7 @@ on:
     push:
         branches:
             - main
-            - attom_proxy
+            - bedrock-inegration
 jobs:
     deploy:
         name: Deploy Backend
