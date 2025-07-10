@@ -48,9 +48,11 @@ package:
 functions:
   bedrock:
     name: dvst-estatengine-backend-bedrock-handler-${sls:stage}
-    handler: src/bedrock_handler/bin/main
+    handler: bootstrap
     runtime: provided.al2023
     timeout: 30
+    package:
+      artifact: src/bedrock_handler/bedrock_handler.zip
     environment:
       AGENT_ID : ${env:AGENT_ID}
       AGENT_ALIAS_ID: ${env:AGENT_ALIAS_ID}
