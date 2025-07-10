@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 	"sync"
+
+	"github.com/google/uuid"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -84,11 +85,11 @@ func handler(ctx context.Context, req Request) (Response, error) {
 		log.Println(input)
 		go func(field, input string) {
 			defer wg.Done()
-
+			id := uuid.NewString()
 			resp, err := client.InvokeAgent(ctx, &bedrockagentruntime.InvokeAgentInput{
 				AgentId:      &agentId,
 				AgentAliasId: &agentAliasId,
-				SessionId:    awsString(fmt.Sprintf("session-%s", field)),
+				SessionId:    &id,
 				//MemoryId:     &agentMemoryId,
 				InputText: awsString(input),
 			})
