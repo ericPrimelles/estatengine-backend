@@ -27,7 +27,7 @@ provider:
             - bedrock:InvokeAgent
           Resource: '*'
         
-        - Effect:
+        - Effect: Allow
           Action:
             - sts:AssumeRole
           Resource: ${env:CROSS_ACCOUNT_ROLE}
