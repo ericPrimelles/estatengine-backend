@@ -65,8 +65,8 @@ func handler(ctx context.Context, req Request) (Response, error) {
 				AgentId:      &agentId,
 				AgentAliasId: &agentAliasId,
 				SessionId:    awsString(fmt.Sprintf("session-%s", field)),
-				MemoryId:     &agentMemoryId,
-				InputText:    awsString(input),
+				//MemoryId:     &agentMemoryId,
+				InputText: awsString(input),
 			})
 
 			if err != nil {
