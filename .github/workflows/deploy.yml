@@ -68,7 +68,7 @@ jobs:
                 #Building go lambdas
                 cd bedrock_handler
                 make build
-                zip myFunction.zip boostrap
+                zip myFunction.zip bootstrap
                 cd ..
 
                 # Building Python Lambdas
