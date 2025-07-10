@@ -81,6 +81,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
 
 	for field, input := range inputs {
 		wg.Add(1)
+		log.Println(input)
 		go func(field, input string) {
 			defer wg.Done()
 
