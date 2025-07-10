@@ -21,6 +21,11 @@ provider:
             - logs:CreateLogStream
             - logs:PutLogEvents
           Resource: "arn:aws:logs"
+        
+        - Effect: Allow
+          Action:
+            - bedrock:InvokeAgent
+          Resource: '*'
 plugins:
   - serverless-appsync-plugin
   #- serverless-python-requirements
@@ -41,13 +46,17 @@ package:
     - src/dist/*
    
 functions:
-  openai:
-    name: dvst-estatengine-backend-openai-proxy-${sls:stage}
-    handler: openai_proxy.handler
-    package: 
-      # include:
-      #   - src/openai_proxy/*
-      artifact: src/dist/openai_proxy.zip
+  bedrock:
+    name: dvst-estatengine-backend-bedrock-handler-${sls:stage}
+    handler: src/bedrock_handler/bin/main
+    runtime: go1.x
+    timeout: 30
+    environment:
+      AGENT_ID : ${env:AGENT_ID}
+      AGENT_ALIAS_ID: ${env:AGENT_ALIAS_ID}
+      
+    
+    
 
   search_engine:
     name: dvst-estatengine-backend-search-engine-${sls:stage}
