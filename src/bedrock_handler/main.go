@@ -23,10 +23,12 @@ type Request struct {
 }
 
 type Response struct {
-	Description string `json:"description"`
-	Features    string `json:"features"`
-	Area        string `json:"area"`
-	Comparables string `json:"comparables"`
+	Description     string `json:"description"`
+	FeaturesBasic   string `json:"features_basic"`
+	FeaturesHistory string `json:features_history`
+	FeaturesDetails string `json:features_details`
+	Area            string `json:"area"`
+	Comparables     string `json:"comparables"`
 }
 
 var (
@@ -71,10 +73,12 @@ func handler(ctx context.Context, req Request) (Response, error) {
 
 	var address string = req.Address
 	inputs := map[string]string{
-		"description": "description: " + address,
-		"features":    "features: " + address,
-		"area":        "area: " + address,
-		"comparables": "comparable: " + address,
+		"description":      "description: " + address,
+		"features_basic":   "features-basic: " + address,
+		"features_history": "features-history: " + address,
+		"features_details": "features-details: " + address,
+		"area":             "area: " + address,
+		"comparables":      "comparable: " + address,
 	}
 	id := uuid.NewString()
 	var wg sync.WaitGroup
@@ -129,8 +133,12 @@ func handler(ctx context.Context, req Request) (Response, error) {
 		switch r.field {
 		case "description":
 			res.Description = r.data
-		case "features":
-			res.Features = r.data
+		case "features_basic":
+			res.FeaturesBasic = r.data
+		case "features_history":
+			res.FeaturesHistory = r.data
+		case "features_details":
+			res.FeaturesDetails = r.data
 		case "area":
 			res.Area = r.data
 		case "comparables":
