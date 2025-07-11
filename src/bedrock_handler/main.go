@@ -83,12 +83,12 @@ func handler(ctx context.Context, req Request) (Response, error) {
 
 	var wg sync.WaitGroup
 	resultChan := make(chan fieldResult, 4)
-
+	id := uuid.NewString()
 	for field, input := range inputs {
 		wg.Add(1)
 
 		go func(field, input string) {
-			id := uuid.NewString()
+
 			defer wg.Done()
 			log.Println(input)
 			resp, err := client.InvokeAgent(ctx, &bedrockagentruntime.InvokeAgentInput{
