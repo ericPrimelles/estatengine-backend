@@ -82,7 +82,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
 
 	for field, input := range inputs {
 		wg.Add(1)
-		log.Println(input)
+
 		go func(field, input string) {
 			defer wg.Done()
 			id := uuid.NewString()
@@ -109,7 +109,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
 				}
 
 			}
-
+			log.Printf("%s, %s", field, result)
 			resultChan <- fieldResult{field: field, data: result}
 		}(field, input)
 	}
