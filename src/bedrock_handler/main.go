@@ -85,7 +85,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
 
 		go func(field, input string) {
 			defer wg.Done()
-
+			log.Println(input)
 			resp, err := client.InvokeAgent(ctx, &bedrockagentruntime.InvokeAgentInput{
 				AgentId:      &agentId,
 				AgentAliasId: &agentAliasId,
