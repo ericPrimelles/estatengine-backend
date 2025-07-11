@@ -76,7 +76,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
 		"area":        "area: " + address,
 		"comparables": "comparable: " + address,
 	}
-
+	id := uuid.NewString()
 	var wg sync.WaitGroup
 	resultChan := make(chan fieldResult, 4)
 
@@ -85,13 +85,13 @@ func handler(ctx context.Context, req Request) (Response, error) {
 
 		go func(field, input string) {
 			defer wg.Done()
-			id := uuid.NewString()
+
 			resp, err := client.InvokeAgent(ctx, &bedrockagentruntime.InvokeAgentInput{
 				AgentId:      &agentId,
 				AgentAliasId: &agentAliasId,
 				SessionId:    &id,
 				//MemoryId:     &agentMemoryId,
-				InputText: awsString(input),
+				InputText: &input,
 			})
 
 			if err != nil {
