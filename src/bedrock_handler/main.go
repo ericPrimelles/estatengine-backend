@@ -82,7 +82,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
 	}
 
 	var wg sync.WaitGroup
-	resultChan := make(chan fieldResult, 4)
+	resultChan := make(chan fieldResult, 6)
 	id := uuid.NewString()
 	for field, input := range inputs {
 		wg.Add(1)
