@@ -25,8 +25,8 @@ type Request struct {
 type Response struct {
 	Description     string `json:"description"`
 	FeaturesBasic   string `json:"features_basic"`
-	FeaturesHistory string `json:features_history`
-	FeaturesDetails string `json:features_details`
+	FeaturesHistory string `json:json:"features_history"`
+	FeaturesDetails string `json:"features_details"`
 	Area            string `json:"area"`
 	Comparables     string `json:"comparables"`
 }
@@ -80,7 +80,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
 		"area":             "area: " + address,
 		"comparables":      "comparable: " + address,
 	}
-	id := uuid.NewString()
+
 	var wg sync.WaitGroup
 	resultChan := make(chan fieldResult, 4)
 
@@ -88,6 +88,7 @@ func handler(ctx context.Context, req Request) (Response, error) {
 		wg.Add(1)
 
 		go func(field, input string) {
+			id := uuid.NewString()
 			defer wg.Done()
 			log.Println(input)
 			resp, err := client.InvokeAgent(ctx, &bedrockagentruntime.InvokeAgentInput{
