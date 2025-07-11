@@ -55,7 +55,7 @@ functions:
     name: dvst-estatengine-backend-bedrock-handler-${sls:stage}
     handler: bootstrap
     runtime: provided.al2023
-    timeout: 30
+    timeout: 120
     package:
       artifact: src/bedrock_handler/bedrock_handler.zip
     environment:
