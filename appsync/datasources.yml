@@ -30,3 +30,12 @@ AttomPropertyAPI:
       awsIamConfig:
         signingRegion: ${self:provider.region}
         signingServiceName: execute-api
+
+BedrockLambda:
+  type: AWS_LAMBDA
+  config:
+    functionArn: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-bedrock-handler-${sls:stage}"
+    serviceRoleArn: 
+      Fn::GetAtt: [AppsyncPermissionsRole, Arn]
+    region: ${self:provider.region}
+    description: Lambda function to integrate bedrock agent

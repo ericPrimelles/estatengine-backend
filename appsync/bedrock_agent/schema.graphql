@@ -1,0 +1,34 @@
+extend type Query {
+    getPropertyReportPart(address_line_1: String!,
+                          address_line_2: String,
+                          city: String!,
+                          zipCode: String!,
+                          state: String!,
+                          operation: Enum!
+                        )PropertyReportResponse
+}
+
+Enum operation {
+    description
+    features_basic
+    features_history
+    features_details
+    area
+    comparables
+
+}
+
+type PropertyReportResponse{
+    message: String
+    data: PropertyReport
+}
+
+type PropertyReport{
+  description: String 
+  features_basic: String 
+  features_history: String 
+  features_details: 
+  area: String 
+  comparables: String 
+}
+

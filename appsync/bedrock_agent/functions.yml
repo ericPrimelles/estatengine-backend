@@ -1,0 +1,3 @@
+getPropertyReportPartFunction:
+  dataSource: BedrockLambda
+  code: appsync/bedrock_agent/functions/getPropertyReportPartFunction.js

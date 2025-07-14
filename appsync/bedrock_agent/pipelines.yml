@@ -1,0 +1,5 @@
+Query.getPropertyReportPart:
+  dataSource: BackendDdBbTable
+  functions:
+    - getPropertyReportPartFunction
+  code: appsync/bedrock_agent/pipelines/Query.getPropertyReportPart.js

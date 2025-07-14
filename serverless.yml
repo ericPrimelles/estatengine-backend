@@ -84,6 +84,7 @@ appSync:
     - ./appsync/backend_table/schema.graphql
     - ./appsync/search_engine/schema.graphql
     - ./appsync/attom_property_api/schema.graphql
+    - ./appsync/bedrock_agent/schema.graphql
   authentication:
     type: API_KEY
   apiKeys:
@@ -105,10 +106,12 @@ appSync:
     - ${file(./appsync/backend_table/pipelines.yml)}
     - ${file(./appsync/search_engine/pipelines.yml)}
     - ${file(./appsync/attom_property_api/pipelines.yml)}
+    - - ${file(./appsync/bedrock_agent/pipelines.yml)}
   pipelineFunctions:
     - ${file(./appsync/backend_table/functions.yml)}
     - ${file(./appsync/search_engine/functions.yml)}
     - ${file(./appsync/attom_property_api/functions.yml)}
+    - ${file(./appsync/bedrock_agent/functions.yml)}
   environment:
     AT_API_KEY: ${env:ATTOM_APIKEY}
     STAGE: ${sls:stage}
@@ -138,6 +141,7 @@ resources:
                   Resource:
                     - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-openai-proxy-${sls:stage}"
                     - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-search-engine-${sls:stage}"
+                    - !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:dvst-estatengine-backend-bedrock-handler-${sls:stage}"
                     
           - PolicyName: AppsyncDynamoDBPolicy
             PolicyDocument:
