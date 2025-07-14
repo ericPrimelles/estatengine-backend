@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 	"os"
-	"sync"
 
 	"github.com/google/uuid"
 
@@ -19,13 +18,13 @@ import (
 
 type Request struct {
 	Address   string `json:"address"`
-	SessionId string `json:"session_id"`
+	Operation string `json:"operation"`
 }
 
 type Response struct {
 	Description     string `json:"description"`
 	FeaturesBasic   string `json:"features_basic"`
-	FeaturesHistory string `json:json:"features_history"`
+	FeaturesHistory string `json:"features_history"`
 	FeaturesDetails string `json:"features_details"`
 	Area            string `json:"area"`
 	Comparables     string `json:"comparables"`
@@ -72,86 +71,56 @@ func handler(ctx context.Context, req Request) (Response, error) {
 	}
 
 	var address string = req.Address
-	inputs := map[string]string{
-		"description":      "description: " + address,
-		"features_basic":   "features-basic: " + address,
-		"features_history": "features-history: " + address,
-		"features_details": "features-details: " + address,
-		"area":             "area: " + address,
-		"comparables":      "comparable: " + address,
-	}
+	var operation string = req.Operation
+	input := operation + ": " + address
 
-	var wg sync.WaitGroup
-	resultChan := make(chan fieldResult, 6)
+	// var wg sync.WaitGroup
+	// resultChan := make(chan fieldResult, 6)
 	id := uuid.NewString()
-	for field, input := range inputs {
-		wg.Add(1)
 
-		go func(field, input string) {
+	var res Response
+	log.Println(input)
+	resp, err := client.InvokeAgent(ctx, &bedrockagentruntime.InvokeAgentInput{
+		AgentId:      &agentId,
+		AgentAliasId: &agentAliasId,
+		SessionId:    &id,
+		//MemoryId:     &agentMemoryId,
+		InputText: &input,
+	})
 
-			defer wg.Done()
-			log.Println(input)
-			resp, err := client.InvokeAgent(ctx, &bedrockagentruntime.InvokeAgentInput{
-				AgentId:      &agentId,
-				AgentAliasId: &agentAliasId,
-				SessionId:    &id,
-				//MemoryId:     &agentMemoryId,
-				InputText: &input,
-			})
+	if err != nil {
+		log.Fatal(err)
 
-			if err != nil {
-				resultChan <- fieldResult{field: field, err: err}
-				return
-			}
-			defer resp.GetStream().Close()
-
-			var result string
-
-			for event := range resp.GetStream().Events() {
-				switch e := event.(type) {
-				case *types.ResponseStreamMemberChunk:
-					result += string(e.Value.Bytes)
-				}
-
-			}
-			log.Printf("%s, %s", field, result)
-			resultChan <- fieldResult{field: field, data: result}
-		}(field, input)
 	}
+	defer resp.GetStream().Close()
 
-	// Wait and close the channel
-	go func() {
-		wg.Wait()
-		close(resultChan)
-	}()
+	var result string
+
+	for event := range resp.GetStream().Events() {
+		switch e := event.(type) {
+		case *types.ResponseStreamMemberChunk:
+			result += string(e.Value.Bytes)
+		}
+	}
+	log.Printf("%s", result)
 
 	// Collect results
-	var res Response
-	for r := range resultChan {
-		if r.err != nil {
-			return Response{}, r.err
-		}
-		switch r.field {
-		case "description":
-			res.Description = r.data
-		case "features_basic":
-			res.FeaturesBasic = r.data
-		case "features_history":
-			res.FeaturesHistory = r.data
-		case "features_details":
-			res.FeaturesDetails = r.data
-		case "area":
-			res.Area = r.data
-		case "comparables":
-			res.Comparables = r.data
-		}
+	switch operation {
+	case "description":
+		res.Description = result
+	case "features_basic":
+		res.FeaturesBasic = result
+	case "features_history":
+		res.FeaturesHistory = result
+	case "features_details":
+		res.FeaturesDetails = result
+	case "area":
+		res.Area = result
+	case "comparables":
+		res.Comparables = result
 	}
 
 	return res, nil
-}
-
-func awsString(v string) *string {
-	return &v
 }
 
 func main() {
