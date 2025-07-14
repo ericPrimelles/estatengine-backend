@@ -106,7 +106,7 @@ appSync:
     - ${file(./appsync/backend_table/pipelines.yml)}
     - ${file(./appsync/search_engine/pipelines.yml)}
     - ${file(./appsync/attom_property_api/pipelines.yml)}
-    - - ${file(./appsync/bedrock_agent/pipelines.yml)}
+    - ${file(./appsync/bedrock_agent/pipelines.yml)}
   pipelineFunctions:
     - ${file(./appsync/backend_table/functions.yml)}
     - ${file(./appsync/search_engine/functions.yml)}
