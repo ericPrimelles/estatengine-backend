@@ -27,7 +27,7 @@ type PropertyReport{
   description: String 
   features_basic: String 
   features_history: String 
-  features_details: 
+  features_details: String
   area: String 
   comparables: String 
 }
