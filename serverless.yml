@@ -84,7 +84,7 @@ appSync:
     - ./appsync/backend_table/schema.graphql
     - ./appsync/search_engine/schema.graphql
     - ./appsync/attom_property_api/schema.graphql
-    - ./appsync/bedrock_agent/schema.graphql
+    #- ./appsync/bedrock_agent/schema.graphql
   authentication:
     type: API_KEY
   apiKeys:
