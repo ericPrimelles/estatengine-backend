@@ -14,7 +14,7 @@ export function request(ctx) {
             state,
             operation} = ctx.args || {};
     
-    const address = `${address_line_1}${' ' + address_line_2}, ${city}, ${city}, ${state} ${zipCode},`
+    const address = `${address_line_1}${' ' + address_line_2}, ${city}, ${state} ${zipCode},`
     
     return{
         version : "2018-05-29",
@@ -49,7 +49,7 @@ export const response = (ctx) => {
     if (ctx.result) {
         
         return {
-            data: ctx.result.body,
+            data: ctx.result,
             message: "Ok"
         };
     }
