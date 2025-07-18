@@ -12,7 +12,7 @@ export function request(ctx) {
             city,
             zipCode,
             state,
-            operation} = ctx.args.preferences || {};
+            operation} = ctx.args || {};
     
     const address = `${address_line_1}${' ' + address_line_2}, ${city}, ${city}, ${state} ${zipCode},`
     
