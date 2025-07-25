@@ -86,17 +86,11 @@ appSync:
     - ./appsync/attom_property_api/schema.graphql
     - ./appsync/bedrock_agent/schema.graphql
   authentication:
-    type: API_KEY
-  apiKeys:
-    - name: dvst-estatengine-backend-graphqlApi-${sls:stage}-key
-      description: API Key for the GraphQL API
-      expires: 1Y # 1 year, adjust as needed
-  additionalAuthentications:
-    - type: AMAZON_COGNITO_USER_POOLS
-      config:
-        userPoolId: ${env:COGNITO_USER_POOL_ID}
-        awsRegion: ${self:provider.region}
-        appIdClientRegex: ${env:COGNITO_USER_POOL_CLIENT_ID}
+    type: AMAZON_COGNITO_USER_POOLS
+    config:
+      userPoolId: ${env:COGNITO_USER_POOL_ID}
+      awsRegion: ${self:provider.region}
+      appIdClientRegex: ${env:COGNITO_USER_POOL_CLIENT_ID}
   logging:
     level: ALL
     retentionInDays: 3
