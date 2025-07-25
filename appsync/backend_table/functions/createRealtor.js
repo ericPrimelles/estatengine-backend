@@ -7,6 +7,7 @@ import {util} from "@aws-appsync/utils";
 export function request(ctx) {
     const PK = `REALTOR#ACCOUNT#${ctx.identity?.username ?? "mockUser"}#`;
     const SK = `REALTOR#ACCOUNT#${ctx.identity?.username ?? "mockUser"}#`;
+    const email = ctx.identity?.email
     return{
         operation : "PutItem",
         key : {
@@ -17,7 +18,7 @@ export function request(ctx) {
             name: util.dynamodb.toDynamoDB(ctx.arguments.input.name),
             midddleName: util.dynamodb.toDynamoDB(ctx.arguments.input.midddleName),
             lastName: util.dynamodb.toDynamoDB(ctx.arguments.input.lastName),
-            email: util.dynamodb.toDynamoDB(ctx.arguments.input.email),
+            email: util.dynamodb.toDynamoDB(email),
             phone: util.dynamodb.toDynamoDB(ctx.arguments.input.phone),
             agentTyype: util.dynamodb.toDynamoDB(ctx.arguments.input.agentTyype),
             operationAreas: util.dynamodb.toDynamoDB(ctx.arguments.input.operationAreas),
