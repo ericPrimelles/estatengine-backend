@@ -10,8 +10,8 @@ export function request(ctx) {
     return{
         operation : "GetItem",
         key : {
-            PK: PK,
-            SK: SK
+            PK: util.dynamodb.toDynamoDB(PK),
+            SK: util.dynamodb.toDynamoDB(SK)
         }
 
     };
