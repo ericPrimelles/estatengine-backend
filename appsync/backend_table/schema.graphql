@@ -20,7 +20,7 @@ input CreateRealtorInput {
     lastName: String!
     email: String!
     phone: String!
-    agentTyype: String!
+    agentType: String!
     operationAreas: [String]!
     languages: [String]!
     communicationStyles: [String]!
