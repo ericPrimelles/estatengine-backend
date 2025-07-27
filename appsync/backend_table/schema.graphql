@@ -5,6 +5,7 @@ extend type Mutation{
 }
 extend type Query {
     getRealtor: RealtorResponse
+    getRealtorTypes: [String]
 }
 
 # General Data Types
@@ -16,7 +17,7 @@ interface Response {
 ## Realtor endpoints
 input CreateRealtorInput {
     name: String!
-    midddleName: String
+    middleName: String
     lastName: String!
     phone: String!
     agentType: String!
@@ -35,7 +36,7 @@ type Realtor {
     lastName: String!
     email: String!
     phone: String!
-    agentTyype: String!
+    agentType: String!
     operationAreas: [String]!
     languages: [String]!
     communicationStyles: [String]!
